@@ -8,10 +8,10 @@ Trabalho Prático - Entrega 1
 <li> Rafael Ferreira Leandro </li>
 </ul>
 
-<b> Diagrama De Classes </b>
+<b> Diagrama De Classes: </b>
 
 <img src="diagrama.png">
 
-<b> Diagrama De Objetos </b>
+<b> Diagrama De Objetos: </b>
 
 <img src="diagrama2.png">
