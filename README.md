@@ -9,3 +9,5 @@ Trabalho Prático - Entrega 1
 </ul>
 
 <b> Diagrama De Classes </b>
+
+<img src="diagrama.png">
