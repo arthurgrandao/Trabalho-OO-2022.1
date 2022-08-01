@@ -15,4 +15,4 @@ Trabalho Prático - Entrega 1
 
 <b> Diagrama De Objetos: </b>
 
-<img src="diagrama2.png">
+<img src="diagrama1.png">
