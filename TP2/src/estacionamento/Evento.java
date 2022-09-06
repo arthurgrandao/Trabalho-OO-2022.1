@@ -56,8 +56,7 @@ public class Evento extends GerenciarAcessos {
 
 	@Override
 	public float calcularValor() {
-		// TODO Auto-generated method stub
-		return 0;
+		return e.getTaxaFixaEve();
 	}
 
 }

@@ -35,13 +35,13 @@ public abstract class GerenciarAcessos {
 		do {
 			roda = false;
 
-			String placa = JOptionPane.showInputDialog("Informe a Placa do ve�culo:");
+			String placa = JOptionPane.showInputDialog("Informe a Placa do veículo:");
 			String dataDeEntrada = JOptionPane.showInputDialog("Informe a Data de Entrada:");
 			String dataDeSaida = JOptionPane.showInputDialog("Informe a Data de Saida:");
 			a.setPlaca(placa);
 			a.setDataEntrada(dataDeEntrada);
 			a.setDataSaida(dataDeSaida);
-			int evento = JOptionPane.showConfirmDialog(null, "� do tipo Evento ?:");
+			int evento = JOptionPane.showConfirmDialog(null, "É do tipo Evento ?:");
 			if (evento == JOptionPane.YES_OPTION) { // Evento
 				a.setEvento(true);
 				String inicioDoEvento = JOptionPane.showInputDialog("Informe a hora do Evento:");
@@ -59,7 +59,7 @@ public abstract class GerenciarAcessos {
 			}
 
 			else if (evento == JOptionPane.NO_OPTION) {
-				int mensalista = JOptionPane.showConfirmDialog(null, "� do tipo Mensalista ?");
+				int mensalista = JOptionPane.showConfirmDialog(null, "É do tipo Mensalista ?");
 
 				if (mensalista == JOptionPane.YES_OPTION) { // Mensalista
 					a.setMensalista(true);

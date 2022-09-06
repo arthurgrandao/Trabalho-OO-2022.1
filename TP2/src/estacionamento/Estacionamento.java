@@ -122,6 +122,7 @@ public class Estacionamento {
 			throw new DescricaoEmBrancoException();
 		} else if (capacidade <= 0 || descontoHora <= 0 || contratante <= 0 || taxaDiaria <= 0 || taxaNoturno <= 0
 				|| taxaFixaMensal <= 0 || valorFracao <= 0) {
+			throw new ValorAcessoInvalidoException();		
 		}
 
 		Estacionamento estacio = new Estacionamento(tipoDeEstacionamento, horaDeAbrir, horaDeFechar, capacidade,
