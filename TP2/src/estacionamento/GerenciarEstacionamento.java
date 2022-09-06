@@ -1,9 +1,16 @@
 package estacionamento;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import exceptions.DescricaoEmBrancoException;
+import exceptions.ObjetoNaoEncontradoException;
+import exceptions.ValorAcessoInvalidoException;
+
 public class GerenciarEstacionamento {
 
-<<<<<<< Updated upstream
-=======
 	public static Estacionamento estacio;
 
 	public List<Estacionamento> e;
@@ -113,5 +120,4 @@ public class GerenciarEstacionamento {
 		return (60 * horario) + minutos;
 	}
 
->>>>>>> Stashed changes
 }

@@ -1,5 +1,5 @@
 package exceptions;
 
-public class DescricaoEmBrancoException {
+public class DescricaoEmBrancoException extends Exception{
 
 }
