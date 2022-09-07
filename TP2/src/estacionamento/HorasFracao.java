@@ -15,7 +15,6 @@ public class HorasFracao extends Padrao {
 		this.valorTotal = valorTotal;
 	}
 
-	@Override
 	public float calcularValor() {
 		int temp = calcularTempo();
 
@@ -31,17 +30,17 @@ public class HorasFracao extends Padrao {
 		return resultado;
 	}
 
-	@Override
 	public float calcularContratante() {
 		float contra = calcularValor() * es.getContratante();
 		return contra;
 	}
 
+	@Override
 	public int calcularTempo() {
-		String dataDeEntrada = a.getDataEntrada();
-		String dataDeSaida = a.getDataSaida();
-		int horaDeEntrada = a.getHoraEntrada();
-		int horaDeSaida = a.getHoraSaida();
+		String dataDeEntrada = getDataEntrada();
+		String dataDeSaida = getDataSaida();
+		int horaDeEntrada = getHoraEntrada();
+		int horaDeSaida = getHoraSaida();
 		int temp;
 
 		if (dataDeEntrada != dataDeSaida) {

@@ -3,7 +3,7 @@ package estacionamento;
 import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
-public class Evento extends GerenciarAcessos {
+public class Evento extends Acessos {
 
 	private String inicioEvento,
 			fimEvento, nomeEvento;
@@ -67,7 +67,6 @@ public class Evento extends GerenciarAcessos {
 		}
 	}
 
-	@Override
 	public float calcularContratante() {
 		Evento e = new Evento(inicioEvento, fimEvento, taxaFixaEve, eEvento , nomeEvento);
 		int valor = e.getTaxaFixaEve();
@@ -75,9 +74,8 @@ public class Evento extends GerenciarAcessos {
 		return contra;
 	}
 
-	@Override
 	public float calcularValor() {
-		return e.getTaxaFixaEve();
+		return getTaxaFixaEve();
 	}
 
 }

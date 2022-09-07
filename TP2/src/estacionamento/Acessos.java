@@ -5,6 +5,8 @@ import exceptions.ValorAcessoInvalidoException;
 
 public class Acessos {
 
+	public static Estacionamento es = new Estacionamento();
+
 	protected String placa = "";
 
 	protected String dataEntrada = "";
@@ -18,6 +20,8 @@ public class Acessos {
 
 	public Acessos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista,
 			int horaEntrada, int horaSaida) {
+		es = new Estacionamento();
+		
 		this.placa = placa;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;

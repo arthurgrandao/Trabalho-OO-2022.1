@@ -42,8 +42,7 @@ public class Main {
 				break;
 			}
 			case 3: {
-				GerenciarAcessos.pesquisarAcessos();
-				GerenciarAcessos.relatorio();
+				GerenciarAcessos.relatorio(GerenciarAcessos.pesquisarAcessos());
 				break;
 			}
 			/*case 4: {

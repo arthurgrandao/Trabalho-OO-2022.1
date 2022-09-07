@@ -1,6 +1,6 @@
 package estacionamento;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,25 +13,24 @@ import exceptions.ValorAcessoInvalidoException;
 
 public abstract class GerenciarAcessos {
 
+	public static Estacionamento es = new Estacionamento();
+
+	public static Evento e = new Evento();
+
 	public static Acessos a = new Acessos();
 
 	//public static GerenciarAcessos g = new GerenciarAcessos();
 
-	public static Estacionamento es = new Estacionamento();
-
-	private static List<Acessos> acs = new ArrayList<>();
-
-	public static Evento e = new Evento();
+	private static List<Acessos> acs = new LinkedList<Acessos>();;
 
 	public GerenciarAcessos() {
-		acs = new LinkedList<Acessos>();
-		es = new Estacionamento();
 	}
-
+	/* 
 	public abstract float calcularValor();
 
 	public abstract float calcularContratante();
-
+	*/
+	
 	public static void cadrastrarAcesso() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		boolean roda = false;
 		do {
@@ -44,7 +43,7 @@ public abstract class GerenciarAcessos {
 			a.setDataEntrada(dataDeEntrada);
 			a.setDataSaida(dataDeSaida);
 			int evento = JOptionPane.showConfirmDialog(null, "É do tipo Evento ?:");
-			
+			System.out.println(evento);
 			if (evento == JOptionPane.YES_OPTION) { // Evento
 				e.setEEvento(true);
 				String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
@@ -58,11 +57,17 @@ public abstract class GerenciarAcessos {
 				e.setFimEvento(saidaDoEvento);
 				e.setTaxaFixaEve(taxa);
 				
+				Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa , true ,nomeDoEvento);
+
+				acs.add(e);
+				
+				/* 
 				try {
-					Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa , true ,nomeDoEvento);
+					
+
 				} catch (DescricaoEmBrancoException y) {
 				} catch (ValorAcessoInvalidoException y) {
-				}
+				}*/
 			}
 
 			else if (evento == JOptionPane.NO_OPTION) {
@@ -70,7 +75,7 @@ public abstract class GerenciarAcessos {
 
 				if (mensalista == JOptionPane.YES_OPTION) { // Mensalista
 					a.setMensalista(true);
-					String horaDeEnt = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
+					String horaDeEnt = JOptionPane.showInputDialog("mInforme a hora de Entrada: (HH:mm)");
 					String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 
 					// String horaDeEntrada_str = Integer.toString(converterHora(horaDeEnt));
@@ -81,46 +86,50 @@ public abstract class GerenciarAcessos {
 
 					a.setHoraEntrada(horaDeEntrada);
 					a.setHoraSaida(horaDeSaida);
-
-					try {
-						a = Acessos.criarAcesso(placa, dataDeEntrada, dataDeSaida, false, true, horaDeEntrada,
+					
+					a = Acessos.criarAcesso(placa, dataDeEntrada, dataDeSaida, false, true, horaDeEntrada,
 								horaDeSaida);
+						
+					acs.add(a);
 
+					/* 
+					try {
+						
 						converterHora(horaDeEnt);
 						converterHora(horaDeSai);
 
 					} catch (DescricaoEmBrancoException b) {
 					} catch (ValorAcessoInvalidoException b) {
+					}*/
+				}else { // Padrão
+					String horaDeEnt = JOptionPane.showInputDialog("pInforme a hora de Entrada: (HH:mm)");
+					String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
+	
+					int horaDeEntrada = converterHora(horaDeEnt);
+					int horaDeSaida = converterHora(horaDeSai);
+	
+					int horaDeAbrir = converterHora(es.getHoraDeAbrir());
+					int horaDeFechar = converterHora(es.getHoraDeFechar());
+					
+					a.setHoraEntrada(horaDeEntrada);
+					a.setHoraSaida(horaDeSaida);
+	
+					if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
+						JOptionPane.showMessageDialog(null, "Horário Inválido.");
+						;
+						atualizarAcesso();
+						roda = true;
 					}
-				}
-
-			}
-
-			else { // Padrão
-				String horaDeEnt = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
-				String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
-
-				int horaDeEntrada = converterHora(horaDeEnt);
-				int horaDeSaida = converterHora(horaDeSai);
-
-				int horaDeAbrir = converterHora(es.getHoraDeAbrir());
-				int horaDeFechar = converterHora(es.getHoraDeFechar());
-				
-				a.setHoraEntrada(horaDeEntrada);
-				a.setHoraSaida(horaDeSaida);
-
-				if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
-					JOptionPane.showMessageDialog(null, "Horário Inválido.");
-					;
-					atualizarAcesso();
-					roda = true;
-				}
-
-				try {
 					a = Acessos.criarAcesso(placa, dataDeEntrada, dataDeSaida, false, false, horaDeEntrada,
-							horaDeSaida);
-				} catch (DescricaoEmBrancoException b) {
+								horaDeSaida);
+					System.out.println(acs.add(a));
+					/* 
+					try {
+						
+					} catch (DescricaoEmBrancoException b) {
+					}*/
 				}
+
 			}
 		} while (roda == true);
 	}
@@ -161,17 +170,32 @@ public abstract class GerenciarAcessos {
 		return roda;
 	}
 
-	public static void removerAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException  {
-		a = pesquisarAcessos();
-		if(a != null) {
-		delAcessos();		
+	public static boolean removerAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException  {
+		Acessos a = pesquisarAcessos();
+		System.out.println(a);
+		System.out.println(acs.isEmpty());
+		
+		boolean resposta = false;
+		
+		if (acs.contains(a)) {
+			resposta = acs.remove(a);
 		}
+		
+		JOptionPane.showMessageDialog(null, "Remoção concluída!");
+		
+		return resposta;
+
+		/* 
+		if(a != null) {
+		System.out.println(acs.remove(a));		
+		}*/
+		
 	}
-	
+	/*
 	public static boolean delAcessos() {
-		return acs.remove(a);
+		return 
 	}
-	
+	*/
 	public static int converterHora(String hora) {
 		String horari = hora.substring(0, 2);
 		String minut = hora.substring(3, 5);
@@ -180,13 +204,14 @@ public abstract class GerenciarAcessos {
 		return (60 * horario) + minutos;
 	}
 	
-	public static String relatorio() {
+	public static void relatorio(Acessos a) {
 		String resposta = "Placa : " + a.getPlaca() + "\n";
 		resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
 		if(e.getEEvento() == true){
 			resposta += "Nome do Evento : " +  e.getNomeEvento() + "\n";	
 		}
-		return resposta;
+	
+		JOptionPane.showMessageDialog(null, resposta);;
 	
 	}
 

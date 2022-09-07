@@ -11,8 +11,8 @@ public class Turnos extends Padrao {
 	public boolean isNoturno() {
 		int confirma = calcularTempo();
 
-		String dataDeEntrada = a.getDataEntrada();
-		String dataDeSaida = a.getDataSaida();
+		String dataDeEntrada = getDataEntrada();
+		String dataDeSaida = getDataSaida();
 
 		if (dataDeEntrada != dataDeSaida && confirma < 540) {
 			noturno = true;
@@ -26,7 +26,6 @@ public class Turnos extends Padrao {
 		this.noturno = noturno;
 	}
 
-	@Override
 	public float calcularValor() {
 		float resultado;
 
@@ -43,7 +42,6 @@ public class Turnos extends Padrao {
 		return resultado;
 	}
 
-	@Override
 	public float calcularContratante() {
 
 		float contra = calcularValor() * es.contratante;
@@ -52,10 +50,10 @@ public class Turnos extends Padrao {
 
 	@Override
 	public int calcularTempo() {
-		String dataDeEntrada = a.getDataEntrada();
-		String dataDeSaida = a.getDataSaida();
-		int horaDeEntrada = a.getHoraEntrada();
-		int horaDeSaida = a.getHoraSaida();
+		String dataDeEntrada = getDataEntrada();
+		String dataDeSaida = getDataSaida();
+		int horaDeEntrada = getHoraEntrada();
+		int horaDeSaida = getHoraSaida();
 		int temp;
 
 		if (dataDeEntrada != dataDeSaida) {

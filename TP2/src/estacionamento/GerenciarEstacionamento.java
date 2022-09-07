@@ -81,6 +81,8 @@ public class GerenciarEstacionamento {
 
 			estacio = Estacionamento.criarEstacionamento(tipo, hrabrir, hrfechar, capacidade, horacheia, contra, diaria,
 					noturno, mensal, valor);
+			
+			e.add(estacio);
 
 		} catch (DescricaoEmBrancoException u) {
 

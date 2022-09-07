@@ -1,5 +1,5 @@
 package estacionamento;
 
-abstract public class Padrao extends GerenciarAcessos {
+abstract public class Padrao extends Acessos {
 	public abstract int calcularTempo();
 }
