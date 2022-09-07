@@ -12,15 +12,15 @@ import exceptions.ValorAcessoInvalidoException;
 
 public abstract class GerenciarAcessos {
 
-	public static Acessos a;
+	public static Acessos a = new Acessos();
 
-	public static GerenciarAcessos g;
+	public static GerenciarAcessos g = new GerenciarAcessos();
 
-	public static Estacionamento estacio, es;
+	public static Estacionamento es = new Estacionamento();
 
-	private static List<Acessos> acs;
+	private static List<Acessos> acs = new ArrayList<>();
 
-	public static Evento e;
+	public static Evento e = new Evento();
 
 	public GerenciarAcessos() {
 		acs = new LinkedList<Acessos>();
