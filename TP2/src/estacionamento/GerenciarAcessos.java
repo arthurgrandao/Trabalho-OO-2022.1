@@ -1,5 +1,6 @@
 package estacionamento;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +15,7 @@ public abstract class GerenciarAcessos {
 
 	public static Acessos a = new Acessos();
 
-	public static GerenciarAcessos g = new GerenciarAcessos();
+	//public static GerenciarAcessos g = new GerenciarAcessos();
 
 	public static Estacionamento es = new Estacionamento();
 
@@ -43,6 +44,7 @@ public abstract class GerenciarAcessos {
 			a.setDataEntrada(dataDeEntrada);
 			a.setDataSaida(dataDeSaida);
 			int evento = JOptionPane.showConfirmDialog(null, "É do tipo Evento ?:");
+			
 			if (evento == JOptionPane.YES_OPTION) { // Evento
 				e.setEEvento(true);
 				String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
@@ -50,10 +52,12 @@ public abstract class GerenciarAcessos {
 				String saidaDoEvento = JOptionPane.showInputDialog("Informe a saida do Evento:");
 				String taxaDoEvento = JOptionPane.showInputDialog("Informe a taxa do Evento:");
 				int taxa = Integer.parseInt(taxaDoEvento);
+				
 				e.setNomeEvento(nomeDoEvento);
 				e.setInicioEvento(inicioDoEvento);
 				e.setFimEvento(saidaDoEvento);
 				e.setTaxaFixaEve(taxa);
+				
 				try {
 					Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa , true ,nomeDoEvento);
 				} catch (DescricaoEmBrancoException y) {
@@ -99,9 +103,9 @@ public abstract class GerenciarAcessos {
 				int horaDeEntrada = converterHora(horaDeEnt);
 				int horaDeSaida = converterHora(horaDeSai);
 
-				int horaDeAbrir = converterHora(estacio.getHoraDeAbrir());
-				int horaDeFechar = converterHora(estacio.getHoraDeFechar());
-
+				int horaDeAbrir = converterHora(es.getHoraDeAbrir());
+				int horaDeFechar = converterHora(es.getHoraDeFechar());
+				
 				a.setHoraEntrada(horaDeEntrada);
 				a.setHoraSaida(horaDeSaida);
 
@@ -178,7 +182,7 @@ public abstract class GerenciarAcessos {
 	
 	public static String relatorio() {
 		String resposta = "Placa : " + a.getPlaca() + "\n";
-		resposta += "Tipo Do Estacionamento : " + estacio.getTipoDeEstacionamento() + "\n";
+		resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
 		if(e.getEEvento() == true){
 			resposta += "Nome do Evento : " +  e.getNomeEvento() + "\n";	
 		}

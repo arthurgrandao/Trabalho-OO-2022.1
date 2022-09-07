@@ -30,8 +30,8 @@ public class Turnos extends Padrao {
 	public float calcularValor() {
 		float resultado;
 
-		int taxaDiaria = estacio.getTaxaDiaria();
-		float taxaNoturno = estacio.getTaxaNoturno();
+		int taxaDiaria = es.getTaxaDiaria();
+		float taxaNoturno = es.getTaxaNoturno();
 
 		boolean turn = isNoturno();
 
@@ -46,7 +46,7 @@ public class Turnos extends Padrao {
 	@Override
 	public float calcularContratante() {
 
-		float contra = calcularValor() * estacio.contratante;
+		float contra = calcularValor() * es.contratante;
 		return contra;
 	}
 

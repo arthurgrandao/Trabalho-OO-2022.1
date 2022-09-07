@@ -19,8 +19,8 @@ public class HorasFracao extends Padrao {
 	public float calcularValor() {
 		int temp = calcularTempo();
 
-		int valor = estacio.getValorFracao();
-		float desconto = estacio.getDescontoHora();
+		int valor = es.getValorFracao();
+		float desconto = es.getDescontoHora();
 
 		float resultado = ((int) temp / 15) * valor;
 
@@ -33,7 +33,7 @@ public class HorasFracao extends Padrao {
 
 	@Override
 	public float calcularContratante() {
-		float contra = calcularValor() * estacio.getContratante();
+		float contra = calcularValor() * es.getContratante();
 		return contra;
 	}
 

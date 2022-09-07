@@ -27,6 +27,9 @@ public class Acessos {
 		this.horaSaida = horaSaida;
 	}
 
+	public Acessos() {
+	}
+
 	public int getHoraEntrada() {
 		return horaEntrada;
 	}

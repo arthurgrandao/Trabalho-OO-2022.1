@@ -15,7 +15,10 @@ public class Evento extends GerenciarAcessos {
 	public Evento(String inicioEvento, String fimEvento, int taxaFixaEve , boolean eEvento , String nomeEvento) {
 	}
 
-	public String getNomeEvento() {
+	public Evento() {
+    }
+
+    public String getNomeEvento() {
 		return nomeEvento;
 	}
 

@@ -1,5 +1,6 @@
 package estacionamento;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class GerenciarEstacionamento {
 			throws DescricaoEmBrancoException, ValorAcessoInvalidoException, ObjetoNaoEncontradoException {
 		String tipo = JOptionPane.showInputDialog("Informe o tipo do Estacionamento");
 		estacio.setTipoDeEstacionamento(tipo);
+
 		Estacionamento estacio = buscarEstacionamento(tipo);
 		if (estacio == null) {
 			throw new ObjetoNaoEncontradoException(estacio);
@@ -67,6 +69,7 @@ public class GerenciarEstacionamento {
 
 			estacio.setValorFracao(valor);
 			estacio.setCapacidade(capacidade);
+			
 			estacio.setTaxaDiaria(diaria);
 			estacio.setContratante(contra);
 			estacio.setTaxaFixaMensal(mensal);

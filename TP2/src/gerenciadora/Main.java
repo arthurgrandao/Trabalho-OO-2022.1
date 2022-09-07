@@ -28,6 +28,9 @@ public class Main {
 			String strOpcao = JOptionPane.showInputDialog(menu);
 			opcao = Integer.parseInt(strOpcao);
 
+
+
+			
 			switch (opcao) {
 			case 1: {
 				GerenciarEstacionamento.cadrastrarEstacionamento();
@@ -35,7 +38,7 @@ public class Main {
 				break;
 			}
 			case 2: {
-				GerenciarAcessos.delAcessos();
+				GerenciarAcessos.removerAcessos();
 				break;
 			}
 			case 3: {
