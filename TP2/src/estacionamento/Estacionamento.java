@@ -5,8 +5,8 @@ import exceptions.ValorAcessoInvalidoException;
 
 public class Estacionamento {
 
-	private String tipoDeEstacionamento,
-			horaDeAbrir, horaDeFechar;
+	private String tipoDeEstacionamento = "",
+			horaDeAbrir = "", horaDeFechar = "";
 
 	private int capacidade = 0;
 
