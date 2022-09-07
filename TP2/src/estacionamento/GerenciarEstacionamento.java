@@ -12,9 +12,9 @@ import exceptions.ValorAcessoInvalidoException;
 
 public class GerenciarEstacionamento {
 
-	public static Estacionamento estacio;
+	public static Estacionamento estacio = new Estacionamento();
 	
-	public static List<Estacionamento> e;
+	public static List<Estacionamento> e = new ArrayList<>();
 
 	static Acessos[] ga = new Acessos[0];
 
