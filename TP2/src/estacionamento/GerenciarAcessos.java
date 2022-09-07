@@ -1,5 +1,6 @@
 package estacionamento;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public abstract class GerenciarAcessos {
 
 	public abstract float calcularContratante();
 
-	public static boolean cadrastrarAcesso() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
+	public static void cadrastrarAcesso() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		boolean roda = false;
 		do {
 			roda = false;
@@ -43,16 +44,18 @@ public abstract class GerenciarAcessos {
 			a.setDataSaida(dataDeSaida);
 			int evento = JOptionPane.showConfirmDialog(null, "É do tipo Evento ?:");
 			if (evento == JOptionPane.YES_OPTION) { // Evento
-				a.setEvento(true);
+				e.setEEvento(true);
+				String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
 				String inicioDoEvento = JOptionPane.showInputDialog("Informe a hora do Evento:");
 				String saidaDoEvento = JOptionPane.showInputDialog("Informe a saida do Evento:");
 				String taxaDoEvento = JOptionPane.showInputDialog("Informe a taxa do Evento:");
 				int taxa = Integer.parseInt(taxaDoEvento);
+				e.setNomeEvento(nomeDoEvento);
 				e.setInicioEvento(inicioDoEvento);
 				e.setFimEvento(saidaDoEvento);
 				e.setTaxaFixaEve(taxa);
 				try {
-					Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa);
+					Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa , true ,nomeDoEvento);
 				} catch (DescricaoEmBrancoException y) {
 				} catch (ValorAcessoInvalidoException y) {
 				}
@@ -115,25 +118,35 @@ public abstract class GerenciarAcessos {
 				} catch (DescricaoEmBrancoException b) {
 				}
 			}
-			boolean respost = acs.add(a);
-			return respost;
 		} while (roda == true);
 	}
-
-	public Acessos findAcessos(String placa) throws ObjetoNaoEncontradoException {
-		Acessos achado = null;
-		for (Acessos a : acs) {
-			if (a.getPlaca().equalsIgnoreCase(placa)) {
-				achado = a;
-				break;
-			} else {
-				throw new ObjetoNaoEncontradoException(null);
-			}
-		}
-		return achado;
+	
+	public boolean addAcessos() {
+		return acs.add(a);
 	}
 
-	protected static boolean atualizarAcesso() throws DescricaoEmBrancoException {
+	public static Acessos buscarAcessos(String placa) throws ObjetoNaoEncontradoException{
+		Iterator<Acessos> it = acs.iterator();
+		while(it.hasNext()) {
+			Acessos a = it.next();
+		if (a.getPlaca().equalsIgnoreCase(placa)) {
+		}else {
+			throw new ObjetoNaoEncontradoException(null);
+		}
+		}return a;
+	}
+	
+	public static Acessos pesquisarAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException { //ToString
+		String placa = JOptionPane.showInputDialog("Digite a placa ?");
+		if(placa == null) {
+			throw new DescricaoEmBrancoException();
+		}
+		Acessos	resposta = buscarAcessos(placa);
+		return resposta;
+		}
+
+
+	protected static boolean atualizarAcesso() throws DescricaoEmBrancoException { //Mudar
 		boolean roda = false;
 		int info = JOptionPane.showConfirmDialog(null, "Gostaria de Atualizar suas Informações ?");
 		if (info == JOptionPane.YES_OPTION) {
@@ -144,22 +157,33 @@ public abstract class GerenciarAcessos {
 		return roda;
 	}
 
-	public boolean removerAcesso(Acessos a) throws ObjetoNaoEncontradoException {
-		boolean resposta = false;
-		if (acs.contains(a)) {
-			resposta = acs.remove(a);
-		} else {
-			throw new ObjetoNaoEncontradoException(null);
+	public static void removerAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException  {
+		a = pesquisarAcessos();
+		if(a != null) {
+		delAcessos();		
 		}
-		return resposta;
 	}
-
+	
+	public static boolean delAcessos() {
+		return acs.remove(a);
+	}
+	
 	public static int converterHora(String hora) {
 		String horari = hora.substring(0, 2);
 		String minut = hora.substring(3, 5);
 		int horario = Integer.parseInt(horari);
 		int minutos = Integer.parseInt(minut);
 		return (60 * horario) + minutos;
+	}
+	
+	public static String relatorio() {
+		String resposta = "Placa : " + a.getPlaca() + "\n";
+		resposta += "Tipo Do Estacionamento : " + estacio.getTipoDeEstacionamento() + "\n";
+		if(e.getEEvento() == true){
+			resposta += "Nome do Evento : " +  e.getNomeEvento() + "\n";	
+		}
+		return resposta;
+	
 	}
 
 }

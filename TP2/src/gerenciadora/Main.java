@@ -1,28 +1,20 @@
 package gerenciadora;
 
-import exceptions.DescricaoEmBrancoException
-import exceptions.ObjetoNaoEncontradoException
-import exceptions.ValorAcessoInvalidoException
+import exceptions.DescricaoEmBrancoException;
+import exceptions.ObjetoNaoEncontradoException;
+import exceptions.ValorAcessoInvalidoException;
 
-/*IMPORTANTE!!
-	*(Teremos que fazer algumas modificações para funcionar)!!
-	*Primeiro, teremos que criar mais dois métodos para quando formos cadastrar, o nosso addEstacionamanto deveria ser o cadastrarEstacionamento
-	*e portanto o add é outro método explico melhor amanhã. O mesmo vale para o nosso cadastra caessos. Os  nossos métodos de cadastro deveriam ser os void,
-	*os boolean são outros dois métodos, (não acredito que demore para arrumar isso).
-	
-	*Tudo isso vale para remover também, mas como eu disse não deve ser dificil.
-	
-	*Teremos que revisar um pouco como fazer o find funcionar
-	
-	*Isso que está aqui é só um esqueleto como os métodos que serão usados em cada case.
-	
-	*Como eu disse previamente eu explico melhor amanhã
-	
-*/
+import javax.swing.JOptionPane;
+
+import estacionamento.GerenciarAcessos;
+import estacionamento.GerenciarEstacionamento;
+
 
 public class Main {
+	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DescricaoEmBrancoException, ValorAcessoInvalidoException, ObjetoNaoEncontradoException {
+		
 		int opcao = 0; 
 		do {
 			String menu = ""; 
@@ -38,22 +30,23 @@ public class Main {
 
 			switch (opcao) {
 			case 1: {
-				cadastrarEstacionamento();
-				cadastrarAcessos();
+				GerenciarEstacionamento.cadrastrarEstacionamento();
+				GerenciarAcessos.cadrastrarAcesso();
 				break;
 			}
 			case 2: {
-				removerAcessos();
+				GerenciarAcessos.delAcessos();
 				break;
 			}
 			case 3: {
-				findAcessos();
+				GerenciarAcessos.pesquisarAcessos();
+				GerenciarAcessos.relatorio();
 				break;
 			}
-			case 4: {
+			/*case 4: {
 				atualizarAcessos();
 				break;
-			}
+			}*/
 			case 0: {
 				break;
 			}
@@ -65,4 +58,3 @@ public class Main {
 	}
 	}
 
-}

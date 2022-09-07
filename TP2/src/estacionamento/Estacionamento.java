@@ -8,11 +8,11 @@ public class Estacionamento {
 	private String tipoDeEstacionamento,
 			horaDeAbrir, horaDeFechar;
 
-	private int capacidade;
+	private int capacidade = 0;
 
-	protected float descontoHora, contratante, taxaNoturno;
+	protected float descontoHora = 0.0f, contratante = 0.0f , taxaNoturno = 0.0f;
 
-	protected int taxaDiaria, taxaFixaMensal, valorFracao;
+	protected int taxaDiaria = 0, taxaFixaMensal = 0, valorFracao = 0;
 
 	public Estacionamento(String tipoDeEstacionamento, String horaDeAbrir, String horaDeFechar, int capacidade,
 			float descontoHora, float contratante, int taxaDiaria, float taxaNoturno,

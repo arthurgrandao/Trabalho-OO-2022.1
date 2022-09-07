@@ -1,5 +1,6 @@
 package estacionamento;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,13 +13,15 @@ import exceptions.ValorAcessoInvalidoException;
 public class GerenciarEstacionamento {
 
 	public static Estacionamento estacio;
-
-	public List<Estacionamento> e;
+	
+	public static List<Estacionamento> e;
 
 	static Acessos[] ga = new Acessos[0];
 
 	public GerenciarEstacionamento() {
+		
 		e = new LinkedList<Estacionamento>();
+		estacio = new Estacionamento();
 	}
 
 	private float totalContratante;
@@ -35,11 +38,11 @@ public class GerenciarEstacionamento {
 		this.totalContratante = totalContratante;
 	}
 
-	public boolean addEstacionamento()
+	public static void cadrastrarEstacionamento()
 			throws DescricaoEmBrancoException, ValorAcessoInvalidoException, ObjetoNaoEncontradoException {
 		String tipo = JOptionPane.showInputDialog("Informe o tipo do Estacionamento");
 		estacio.setTipoDeEstacionamento(tipo);
-		Estacionamento estacio = findEstacionamento(tipo);
+		Estacionamento estacio = buscarEstacionamento(tipo);
 		if (estacio == null) {
 			throw new ObjetoNaoEncontradoException(estacio);
 		}
@@ -76,15 +79,16 @@ public class GerenciarEstacionamento {
 			estacio = Estacionamento.criarEstacionamento(tipo, hrabrir, hrfechar, capacidade, horacheia, contra, diaria,
 					noturno, mensal, valor);
 
-		} catch (DescricaoEmBrancoException e) {
+		} catch (DescricaoEmBrancoException u) {
 
-		} catch (ValorAcessoInvalidoException e) {
+		} catch (ValorAcessoInvalidoException u) {
 
 		}
 
-		boolean resposta = e.add(estacio);
-
-		return resposta;
+	}
+	
+	public boolean addEstacionamento() {
+		return e.add(estacio);
 	}
 
 	public void ligarAcesso(Acessos a) {
@@ -96,17 +100,27 @@ public class GerenciarEstacionamento {
 
 		ga = temp;
 	}
-
-	private Estacionamento findEstacionamento(String tipoDeEstacionamento) {
-		Estacionamento encontrado = null;
-		for (Estacionamento estacio : e) {
-			if (estacio.getTipoDeEstacionamento().equalsIgnoreCase(tipoDeEstacionamento)) {
-				encontrado = estacio;
-				break;
-			}
+	
+	public static Estacionamento buscarEstacionamento(String tipo) throws ObjetoNaoEncontradoException{
+		Iterator<Estacionamento> ip = e.iterator();
+		while(ip.hasNext()) {
+			Estacionamento estacio = ip.next();
+		if (estacio.getTipoDeEstacionamento().equalsIgnoreCase(tipo)) {
+		}else {
+			throw new ObjetoNaoEncontradoException(null);
 		}
-		return encontrado;
+		}return estacio;
 	}
+	
+	public static Estacionamento pesquisarEstacionamento() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException { //ToString
+		String tipo = JOptionPane.showInputDialog("Digite o tipo de Estacionamento ?");
+		if(tipo == null) {
+			throw new DescricaoEmBrancoException();
+		}
+		Estacionamento resposta = buscarEstacionamento(tipo);
+		return resposta;
+		}
+	
 
 	public String calcularTotalEstacionamento(float totalContratante) {
 		return null;
