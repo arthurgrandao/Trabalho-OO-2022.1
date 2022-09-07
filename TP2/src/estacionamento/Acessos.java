@@ -5,16 +5,16 @@ import exceptions.ValorAcessoInvalidoException;
 
 public class Acessos {
 
-	protected String placa;
+	protected String placa = "";
 
-	protected String dataEntrada,
-			dataSaida;
+	protected String dataEntrada = "";
+	protected String dataSaida = "";
 
-	protected int horaEntrada,
-			horaSaida;
+	protected int horaEntrada = 0,
+			horaSaida = 0;
 
-	protected boolean evento,
-			mensalista;
+	protected boolean evento = false,
+			mensalista = false;
 
 	public Acessos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista,
 			int horaEntrada, int horaSaida) {
