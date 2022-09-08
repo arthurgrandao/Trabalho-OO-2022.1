@@ -23,7 +23,7 @@ public class Main {
 			menu += "2 - Pesquisar Estacionamento" + '\n';
 			menu += "3 - Cadastrar Acessos" + '\n';
 			menu += "4 - Remover Acessos" + '\n';
-			menu += "5 - Buscar Acessos";
+			menu += "5 - Pesquisar Acessos";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
 			opcao = Integer.parseInt(strOpcao);

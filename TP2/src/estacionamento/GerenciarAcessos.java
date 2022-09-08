@@ -188,6 +188,7 @@ public abstract class GerenciarAcessos {
 		
 		if (acs.contains(a)) {
 			resposta = acs.remove(a);
+			System.out.println("remove = " + resposta);
 		}
 		
 		JOptionPane.showMessageDialog(null, "RemoÃ§Ã£o concluÃ­da!");
@@ -219,6 +220,8 @@ public abstract class GerenciarAcessos {
 		if(eve.getEEvento() == true){
 			resposta += "Nome do Evento : " +  eve.getNomeEvento() + "\n";	
 		}
+		resposta += "Data de entrada - saída: " + a.getDataEntrada()+" - "+a.getDataSaida()+"\n";
+		resposta += "Hora de entrada - saída: " + a.getHoraEntrada()+" - "+a.getHoraSaida()+"\n";
 	
 		JOptionPane.showMessageDialog(null, resposta);;
 	
