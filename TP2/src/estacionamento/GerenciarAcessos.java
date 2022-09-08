@@ -25,17 +25,12 @@ public abstract class GerenciarAcessos {
 
 	public static Acessos a = new Acessos();
 
-	// public static GerenciarAcessos g = new GerenciarAcessos();
 
 	private static List<Acessos> acs = new LinkedList<Acessos>();;
 
 	public GerenciarAcessos() {
 	}
-	/*
-	 * public abstract float calcularValor();
-	 * 
-	 * public abstract float calcularContratante();
-	 */
+
 
 	public static void cadrastrarAcesso() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		boolean roda = false;
@@ -49,14 +44,13 @@ public abstract class GerenciarAcessos {
 				}
 			}
 
-			String placa = JOptionPane.showInputDialog("Informe a Placa do veÃ­culo:");
+			String placa = JOptionPane.showInputDialog("Informe a Placa do veiculo:");
 			String dataDeEntrada = JOptionPane.showInputDialog("Informe a Data de Entrada:");
 			String dataDeSaida = JOptionPane.showInputDialog("Informe a Data de Saida:");
 			a.setPlaca(placa);
 			a.setDataEntrada(dataDeEntrada);
 			a.setDataSaida(dataDeSaida);
-			int evento = JOptionPane.showConfirmDialog(null, "Ã‰ do tipo Evento ?:");
-			System.out.println(evento);
+			int evento = JOptionPane.showConfirmDialog(null, "E do tipo Evento ?:");
 			if (evento == JOptionPane.YES_OPTION) { // Evento
 				eve.setEEvento(true);
 				String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
@@ -85,11 +79,11 @@ public abstract class GerenciarAcessos {
 			}
 
 			else if (evento == JOptionPane.NO_OPTION) {
-				int mensalista = JOptionPane.showConfirmDialog(null, "Ã‰ do tipo Mensalista ?");
+				int mensalista = JOptionPane.showConfirmDialog(null, "E do tipo Mensalista ?");
 
 				if (mensalista == JOptionPane.YES_OPTION) { // Mensalista
 					a.setMensalista(true);
-					String horaDeEnt = JOptionPane.showInputDialog("mInforme a hora de Entrada: (HH:mm)");
+					String horaDeEnt = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
 					String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 
 					// String horaDeEntrada_str = Integer.toString(converterHora(horaDeEnt));
@@ -117,7 +111,7 @@ public abstract class GerenciarAcessos {
 					 * }
 					 */
 				} else { // PadrÃ£o
-					String horaDeEnt = JOptionPane.showInputDialog("pInforme a hora de Entrada: (HH:mm)");
+					String horaDeEnt = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
 					String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 
 					int horaDeEntrada = converterHora(horaDeEnt);
@@ -130,7 +124,7 @@ public abstract class GerenciarAcessos {
 					a.setHoraSaida(horaDeSaida);
 
 					if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
-						JOptionPane.showMessageDialog(null, "HorÃ¡rio InvÃ¡lido.");
+						JOptionPane.showMessageDialog(null, "Horario Invalido.");
 						;
 						atualizarAcesso();
 						roda = true;
@@ -205,33 +199,20 @@ public abstract class GerenciarAcessos {
 
 	public static boolean removerAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException {
 		Acessos a = pesquisarAcessos();
-		System.out.println(a);
-		System.out.println(acs.isEmpty());
 
 		boolean resposta = false;
 
 		if (acs.contains(a)) {
 			resposta = acs.remove(a);
-			System.out.println("remove = " + resposta);
 		}
 
-		JOptionPane.showMessageDialog(null, "RemoÃ§Ã£o concluÃ­da!");
+		JOptionPane.showMessageDialog(null, "Remocao concluida!");
 
 		return resposta;
 
-		/*
-		 * if(a != null) {
-		 * System.out.println(acs.remove(a));
-		 * }
-		 */
 
 	}
 
-	/*
-	 * public static boolean delAcessos() {
-	 * return
-	 * }
-	 */
 	public static int converterHora(String hora) {
 		String horari = hora.substring(0, 2);
 		String minut = hora.substring(3, 5);
