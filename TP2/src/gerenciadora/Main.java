@@ -19,11 +19,11 @@ public class Main {
 		do {
 			String menu = ""; 
 			menu += "Informe a opcao desejada: " + '\n'; 
-			menu += "1 - Cadastrar acesso" + '\n';
-			menu += "2 - Remover acesso" + '\n';
-			menu += "3 - Pesquisar acesso" + '\n';
-			menu += "4 - Atualizar acesso" + '\n';
-			menu += "0 - Sair";
+			menu += "1 - Cadastrar Estacioamento" + '\n';
+			menu += "2 - Pesquisar Estacionamento" + '\n';
+			menu += "3 - Cadastrar Acessos" + '\n';
+			menu += "4 - Remover Acessos" + '\n';
+			menu += "5 - Buscar Acessos";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
 			opcao = Integer.parseInt(strOpcao);
@@ -34,24 +34,26 @@ public class Main {
 			switch (opcao) {
 			case 1: {
 				GerenciarEstacionamento.cadrastrarEstacionamento();
-				GerenciarAcessos.cadrastrarAcesso();
 				break;
 			}
 			case 2: {
-				GerenciarAcessos.removerAcessos();
+				GerenciarEstacionamento.pesquisarEstacionamento();
 				break;
 			}
 			case 3: {
+				GerenciarAcessos.cadrastrarAcesso();
+				break;
+			}
+			case 4: {
+				GerenciarAcessos.removerAcessos();
+				break;
+			}
+			
+			case 5: {
 				GerenciarAcessos.relatorio(GerenciarAcessos.pesquisarAcessos());
 				break;
 			}
-			/*case 4: {
-				atualizarAcessos();
-				break;
-			}*/
-			case 0: {
-				break;
-			}
+			
 			default:
 				opcao = -1; 
 			}
