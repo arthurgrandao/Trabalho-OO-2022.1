@@ -1,18 +1,23 @@
 package estacionamento;
 
+import exceptions.DescricaoEmBrancoException;
+import exceptions.ValorAcessoInvalidoException;
+
 public class HorasFracao extends Padrao {
-	private float valorTotal;
+	public HorasFracao() {
+    }
 
-	public HorasFracao(float valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
-	public float getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(float valorTotal) {
-		this.valorTotal = valorTotal;
+    public HorasFracao(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
+		int horaEntrada, int horaSaida) {
+				this.placa = placa;
+				this.dataEntrada = dataEntrada;
+				this.dataSaida = dataSaida;
+				this.evento = evento;
+				this.mensalista = mensalista;
+				this.turnos = turnos;
+				this.horasfracao = horasfracao;
+				this.horaEntrada = horaEntrada;
+				this.horaSaida = horaSaida;
 	}
 
 	public float calcularValor() {
@@ -52,4 +57,16 @@ public class HorasFracao extends Padrao {
 		return temp;
 	}
 
-}
+	public static HorasFracao criaHorasFracao(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
+	int horaEntrada, int horaSaida)
+	throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
+		if (placa.equalsIgnoreCase("") || dataEntrada.equalsIgnoreCase("") || dataSaida.equalsIgnoreCase("")) {
+			throw new DescricaoEmBrancoException();
+		} else if (horaEntrada < 0 || horaSaida < 0) {
+			throw new ValorAcessoInvalidoException();
+		}
+		HorasFracao a = new HorasFracao(placa, dataEntrada, dataSaida, evento, mensalista, turnos, horasfracao, horaEntrada, horaSaida);
+		return a;
+		}
+	} 
+

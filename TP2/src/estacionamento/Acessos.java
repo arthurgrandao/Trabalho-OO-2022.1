@@ -16,17 +16,19 @@ public class Acessos {
 			horaSaida = 0;
 
 	protected boolean evento = false,
-			mensalista = false;
+			mensalista = false,
+			turnos = false,
+			horasfracao = false;
 
-	public Acessos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista,
-			int horaEntrada, int horaSaida) {
-		es = new Estacionamento();
-		
+	public Acessos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
+			int horaEntrada, int horaSaida) {		
 		this.placa = placa;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.evento = evento;
 		this.mensalista = mensalista;
+		this.turnos = turnos;
+		this.horasfracao= horasfracao;
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;
 	}
@@ -81,6 +83,22 @@ public class Acessos {
 	public void setEvento(boolean evento) {
 		this.evento = evento;
 	}
+	
+	public boolean getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(boolean turnos) {
+		this.turnos = turnos;
+	}
+
+	public boolean getHorasFracao() {
+		return horasfracao;
+	}
+
+	public void setHorasFracao(boolean horasfracao) {
+		this.horasfracao = horasfracao;
+	}
 
 	public boolean isMensalista() {
 		return mensalista;
@@ -90,15 +108,15 @@ public class Acessos {
 		this.mensalista = mensalista;
 	}
 
-	public static Acessos criarAcesso(String placa, String dataEntrada, String dataSaida, boolean evento,
-			boolean mensalista, int horaEntrada, int horaSaida)
+	public static Acessos criarAcesso(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
+			int horaEntrada, int horaSaida)
 			throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		if (placa.equalsIgnoreCase("") || dataEntrada.equalsIgnoreCase("") || dataSaida.equalsIgnoreCase("")) {
 			throw new DescricaoEmBrancoException();
 		} else if (horaEntrada < 0 || horaSaida < 0) {
 			throw new ValorAcessoInvalidoException();
 		}
-		Acessos a = new Acessos(placa, dataEntrada, dataSaida, evento, mensalista, horaEntrada, horaSaida);
+		Acessos a = new Acessos(placa, dataEntrada, dataSaida, evento, mensalista, turnos, horasfracao, horaEntrada,  horaSaida);
 		return a;
 	}
 }
