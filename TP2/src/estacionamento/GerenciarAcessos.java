@@ -15,13 +15,14 @@ public abstract class GerenciarAcessos {
 
 	public static Estacionamento es = new Estacionamento();
 
-	public static Evento e = new Evento();
+	public static Evento eve = new Evento();
 
 	public static Acessos a = new Acessos();
 
 	//public static GerenciarAcessos g = new GerenciarAcessos();
 
 	private static List<Acessos> acs = new LinkedList<Acessos>();;
+	
 
 	public GerenciarAcessos() {
 	}
@@ -35,31 +36,38 @@ public abstract class GerenciarAcessos {
 		boolean roda = false;
 		do {
 			roda = false;
+			Estacionamento estacionamento = null;
+			String tipo = JOptionPane.showInputDialog("Informe o tipo de Estacionamento");
+			for (Estacionamento es : GerenciarEstacionamento.e) {
+				if(es.getTipoDeEstacionamento().equals(tipo)) {
+					 estacionamento = es;
+					 }
+			}
 
-			String placa = JOptionPane.showInputDialog("Informe a Placa do veículo:");
+			String placa = JOptionPane.showInputDialog("Informe a Placa do veÃ­culo:");
 			String dataDeEntrada = JOptionPane.showInputDialog("Informe a Data de Entrada:");
 			String dataDeSaida = JOptionPane.showInputDialog("Informe a Data de Saida:");
 			a.setPlaca(placa);
 			a.setDataEntrada(dataDeEntrada);
 			a.setDataSaida(dataDeSaida);
-			int evento = JOptionPane.showConfirmDialog(null, "É do tipo Evento ?:");
+			int evento = JOptionPane.showConfirmDialog(null, "Ã‰ do tipo Evento ?:");
 			System.out.println(evento);
 			if (evento == JOptionPane.YES_OPTION) { // Evento
-				e.setEEvento(true);
+				eve.setEEvento(true);
 				String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
 				String inicioDoEvento = JOptionPane.showInputDialog("Informe a hora do Evento:");
 				String saidaDoEvento = JOptionPane.showInputDialog("Informe a saida do Evento:");
 				String taxaDoEvento = JOptionPane.showInputDialog("Informe a taxa do Evento:");
 				int taxa = Integer.parseInt(taxaDoEvento);
 				
-				e.setNomeEvento(nomeDoEvento);
-				e.setInicioEvento(inicioDoEvento);
-				e.setFimEvento(saidaDoEvento);
-				e.setTaxaFixaEve(taxa);
+				eve.setNomeEvento(nomeDoEvento);
+				eve.setInicioEvento(inicioDoEvento);
+				eve.setFimEvento(saidaDoEvento);
+				eve.setTaxaFixaEve(taxa);
 				
 				Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa , true ,nomeDoEvento);
 
-				acs.add(e);
+				acs.add(eve);
 				
 				/* 
 				try {
@@ -71,7 +79,7 @@ public abstract class GerenciarAcessos {
 			}
 
 			else if (evento == JOptionPane.NO_OPTION) {
-				int mensalista = JOptionPane.showConfirmDialog(null, "É do tipo Mensalista ?");
+				int mensalista = JOptionPane.showConfirmDialog(null, "Ã‰ do tipo Mensalista ?");
 
 				if (mensalista == JOptionPane.YES_OPTION) { // Mensalista
 					a.setMensalista(true);
@@ -101,21 +109,21 @@ public abstract class GerenciarAcessos {
 					} catch (DescricaoEmBrancoException b) {
 					} catch (ValorAcessoInvalidoException b) {
 					}*/
-				}else { // Padrão
+				}else { // PadrÃ£o
 					String horaDeEnt = JOptionPane.showInputDialog("pInforme a hora de Entrada: (HH:mm)");
 					String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 	
 					int horaDeEntrada = converterHora(horaDeEnt);
 					int horaDeSaida = converterHora(horaDeSai);
 	
-					int horaDeAbrir = converterHora(es.getHoraDeAbrir());
-					int horaDeFechar = converterHora(es.getHoraDeFechar());
+					int horaDeAbrir = converterHora(estacionamento.getHoraDeAbrir());
+					int horaDeFechar = converterHora(estacionamento.getHoraDeFechar());
 					
 					a.setHoraEntrada(horaDeEntrada);
 					a.setHoraSaida(horaDeSaida);
 	
 					if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
-						JOptionPane.showMessageDialog(null, "Horário Inválido.");
+						JOptionPane.showMessageDialog(null, "HorÃ¡rio InvÃ¡lido.");
 						;
 						atualizarAcesso();
 						roda = true;
@@ -123,6 +131,7 @@ public abstract class GerenciarAcessos {
 					a = Acessos.criarAcesso(placa, dataDeEntrada, dataDeSaida, false, false, horaDeEntrada,
 								horaDeSaida);
 					System.out.println(acs.add(a));
+					acs.add(a);
 					/* 
 					try {
 						
@@ -161,7 +170,7 @@ public abstract class GerenciarAcessos {
 
 	protected static boolean atualizarAcesso() throws DescricaoEmBrancoException { //Mudar
 		boolean roda = false;
-		int info = JOptionPane.showConfirmDialog(null, "Gostaria de Atualizar suas Informações ?");
+		int info = JOptionPane.showConfirmDialog(null, "Gostaria de Atualizar suas InformaÃ§Ãµes ?");
 		if (info == JOptionPane.YES_OPTION) {
 
 		} else {
@@ -181,7 +190,7 @@ public abstract class GerenciarAcessos {
 			resposta = acs.remove(a);
 		}
 		
-		JOptionPane.showMessageDialog(null, "Remoção concluída!");
+		JOptionPane.showMessageDialog(null, "RemoÃ§Ã£o concluÃ­da!");
 		
 		return resposta;
 
@@ -207,8 +216,8 @@ public abstract class GerenciarAcessos {
 	public static void relatorio(Acessos a) {
 		String resposta = "Placa : " + a.getPlaca() + "\n";
 		resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
-		if(e.getEEvento() == true){
-			resposta += "Nome do Evento : " +  e.getNomeEvento() + "\n";	
+		if(eve.getEEvento() == true){
+			resposta += "Nome do Evento : " +  eve.getNomeEvento() + "\n";	
 		}
 	
 		JOptionPane.showMessageDialog(null, resposta);;
