@@ -4,9 +4,11 @@ import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
 public class Mensalista extends Acessos {
-	public Mensalista(String placa, String dataEntrada, String dataSaida,String horaEntrada_str, String horaSaida_str, 
-			int horaEntrada, int horaSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao) {		
-		super(placa, dataEntrada, dataSaida, horaEntrada_str, horaSaida_str, horaEntrada, horaSaida, evento, mensalista, turnos, horasfracao);
+	Estacionamento es = null;
+	
+	public Mensalista(String placa, Estacionamento es,String dataEntrada, String dataSaida,String horaEntrada_str, String horaSaida_str, 
+			int horaEntrada, int horaSaida, boolean evento, boolean mensalista) {		
+		super(placa, es, dataEntrada, dataSaida, horaEntrada_str, horaSaida_str, horaEntrada, horaSaida, evento, mensalista);
 	}
 	
 	public Mensalista() {
@@ -23,15 +25,15 @@ public class Mensalista extends Acessos {
 		return 0.00f;
 	}
 
-	public static Mensalista criarMensalista(String placa, String dataEntrada, String dataSaida,String horaEntrada_str, String horaSaida_str, 
-		int horaEntrada, int horaSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao)
+	public static Mensalista criarMensalista(String placa, Estacionamento es, String dataEntrada, String dataSaida,String horaEntrada_str, String horaSaida_str, 
+		int horaEntrada, int horaSaida, boolean evento, boolean mensalista)
 			throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		if (placa.equalsIgnoreCase("") || dataEntrada.equalsIgnoreCase("") || dataSaida.equalsIgnoreCase("")) {
 			throw new DescricaoEmBrancoException();
 		} else if (horaEntrada < 0 || horaSaida < 0) {
 			throw new ValorAcessoInvalidoException();
 		}
-		Mensalista a = new Mensalista(placa, dataEntrada, dataSaida, horaEntrada_str, horaSaida_str, horaEntrada, horaSaida, evento, mensalista, turnos, horasfracao);
+		Mensalista a = new Mensalista(placa, es, dataEntrada, dataSaida, horaEntrada_str, horaSaida_str, horaEntrada, horaSaida, evento, mensalista);
 		return a;
 	}
 }

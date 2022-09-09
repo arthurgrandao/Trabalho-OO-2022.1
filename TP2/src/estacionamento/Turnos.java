@@ -1,14 +1,15 @@
+/* 
 package estacionamento;
 
 import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
 public class Turnos extends Padrao {
-
+	
 	private boolean noturno;
-
+	
 	public Turnos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
-				int horaEntrada, int horaSaida) {		
+	int horaEntrada, int horaSaida) {		
 		this.placa = placa;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
@@ -19,16 +20,16 @@ public class Turnos extends Padrao {
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;
 	}
-
+	
 	public Turnos() {
-    }
-
+	}
+	
     public boolean isNoturno() {
 		int confirma = calcularTempo();
-
+		
 		String dataDeEntrada = getDataEntrada();
 		String dataDeSaida = getDataSaida();
-
+		
 		if (dataDeEntrada != dataDeSaida && confirma < 540) {
 			noturno = true;
 		} else if (dataDeEntrada != dataDeSaida && confirma >= 540) {
@@ -36,19 +37,19 @@ public class Turnos extends Padrao {
 		}
 		return noturno;
 	}
-
+	
 	public void setNoturno(boolean noturno) {
 		this.noturno = noturno;
 	}
-
+	
 	public float calcularValor() {
 		float resultado;
-
+		
 		int taxaDiaria = es.getTaxaDiaria();
 		float taxaNoturno = es.getTaxaNoturno();
 
 		boolean turn = isNoturno();
-
+		
 		if (turn == false) { // Maior que 9h de estadia
 			resultado = (float) taxaDiaria;
 		} else {
@@ -56,13 +57,13 @@ public class Turnos extends Padrao {
 		}
 		return resultado;
 	}
-
+	
 	public float calcularContratante() {
-
+		
 		float contra = calcularValor() * es.contratante;
 		return contra;
 	}
-
+	
 	@Override
 	public int calcularTempo() {
 		String dataDeEntrada = getDataEntrada();
@@ -70,16 +71,16 @@ public class Turnos extends Padrao {
 		int horaDeEntrada = getHoraEntrada();
 		int horaDeSaida = getHoraSaida();
 		int temp;
-
+		
 		if (dataDeEntrada != dataDeSaida) {
 			temp = ((24 * 60) - horaDeEntrada) + horaDeSaida; // 24*60 = Meia-noite
 		} else {
 			temp = horaDeSaida - horaDeEntrada;
 		}
-
+		
 		return temp;
 	}
-
+	
 	public static Turnos criaTurnos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
 	int horaEntrada, int horaSaida)
 	throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
@@ -92,5 +93,5 @@ public class Turnos extends Padrao {
 		return a;
 		}
 	} 
-
-
+	
+	*/

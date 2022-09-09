@@ -13,13 +13,13 @@ import exceptions.ValorAcessoInvalidoException;
 
 public abstract class GerenciarAcessos {
 
-	public static Estacionamento es = new Estacionamento();
+	//public static Estacionamento es = new Estacionamento();
 
-	public static Mensalista m = new Mensalista();
+	//public static Mensalista m = new Mensalista();
 
-	public static Turnos t = new Turnos();
+	//public static Turnos t = new Turnos();
 
-	public static HorasFracao hf = new HorasFracao();
+	//public static HorasFracao hf = new HorasFracao();
 
 	public static Acessos a = new Acessos();
 
@@ -62,8 +62,8 @@ public abstract class GerenciarAcessos {
 
 				float taxaEve = Float.parseFloat(taxaDoEvento);
 
-				Evento eve = Evento.criarEvento(placa, dataDeEntrada, dataDeSaida, horaDeEnt_str, horaDeSai_str,
-						converterHora(horaDeEnt_str), converterHora(horaDeSai_str), true, false, false, false, nomeDoEvento, inicioDoEvento, saidaDoEvento,
+				Evento eve = Evento.criarEvento(placa, estacionamento, dataDeEntrada, dataDeSaida, horaDeEnt_str, horaDeSai_str,
+						converterHora(horaDeEnt_str), converterHora(horaDeSai_str), true, false, nomeDoEvento, inicioDoEvento, saidaDoEvento,
 						taxaEve);
 
 				acs.add(eve);
@@ -92,9 +92,9 @@ public abstract class GerenciarAcessos {
 					a.setHoraEntrada(horaDeEntrada);
 					a.setHoraSaida(horaDeSaida);
 
-					Mensalista a = Mensalista.criarMensalista(placa, dataDeEntrada, dataDeSaida, horaDeEntrada_str, horaDeSaida_str, horaDeEntrada, horaDeSaida, false, true, false, false);
+					Mensalista m = Mensalista.criarMensalista(placa, estacionamento, dataDeEntrada, dataDeSaida, horaDeEntrada_str, horaDeSaida_str, horaDeEntrada, horaDeSaida, false, true);
 
-					acs.add(a);
+					acs.add(m);
 
 					/*
 					 * try {
@@ -116,8 +116,8 @@ public abstract class GerenciarAcessos {
 					int horaDeAbrir = converterHora(estacionamento.getHoraDeAbrir());
 					int horaDeFechar = converterHora(estacionamento.getHoraDeFechar());
 
-					a.setHoraEntrada(horaDeEntrada);
-					a.setHoraSaida(horaDeSaida);
+					//a.setHoraEntrada(horaDeEntrada);
+					//a.setHoraSaida(horaDeSaida);
 
 					if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
 						JOptionPane.showMessageDialog(null, "Horario Invalido.");
@@ -125,16 +125,9 @@ public abstract class GerenciarAcessos {
 						atualizarAcesso();
 						roda = true;
 					}
+					a = Acessos.criarAcesso(placa, estacionamento, dataDeEntrada, dataDeSaida, horaDeEnt, horaDeSai, horaDeEntrada, horaDeSaida, false, false);
+					acs.add(a);
 
-					if (horaDeSaida - horaDeEntrada >= 540) {
-						a = Turnos.criaTurnos(placa, dataDeEntrada, dataDeSaida, false, false, true, false,
-								horaDeEntrada, horaDeSaida);
-						acs.add(a);
-					} else {
-						a = HorasFracao.criaHorasFracao(placa, dataDeEntrada, dataDeSaida, false, false, false, true,
-								horaDeEntrada, horaDeSaida);
-						acs.add(a);
-					}
 
 					/*
 					 * a = Acessos.criarAcesso(placa, dataDeEntrada, dataDeSaida, false, false,
@@ -218,10 +211,13 @@ public abstract class GerenciarAcessos {
 
 	public static void relatorio(Acessos a) {
 		Acessos comp = null;
+		
 		if (a == comp) {
 			JOptionPane.showMessageDialog(null, "Objeto não encontrado.");
 		
 		} else {
+			Estacionamento es = a.getEstacionamento();
+
 			String resposta = "Placa : " + a.getPlaca() + "\n";
 
 			resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
@@ -236,12 +232,13 @@ public abstract class GerenciarAcessos {
 			} else if (a.isMensalista() == true) {
 				Mensalista m = (Mensalista) a;
 				
+				resposta += "Mensalista.\n";
 				resposta += "Valor a pagar: R$" + m.calcularValor() + "\n";
 				resposta += "Valor do contratante: R$" + m.calcularContratante() + "\n";
-			
+			/*  
 			} else if (a.getTurnos() == true) {
 				Turnos t = (Turnos) a;
-				
+
 				resposta += "Valor a pagar: R$" + t.calcularValor() + "\n";
 				resposta += "Valor do contratante: R$" + t.calcularContratante() + "\n";
 			
@@ -250,6 +247,10 @@ public abstract class GerenciarAcessos {
 
 				resposta += "Valor a pagar: R$" + hf.calcularValor() + "\n";
 				resposta += "Valor do contratante: R$" + hf.calcularContratante() + "\n";
+			*/
+			} else {
+				resposta += "Valor a pagar: R$" + a.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + a.calcularContratante() + "\n";
 			}
 			
 			resposta += "Data de entrada - saída: " + a.getDataEntrada() + " - " + a.getDataSaida() + "\n";
