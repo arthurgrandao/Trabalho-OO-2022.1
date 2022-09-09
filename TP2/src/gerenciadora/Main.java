@@ -6,9 +6,13 @@ import exceptions.ValorAcessoInvalidoException;
 
 import javax.swing.JOptionPane;
 
+import estacionamento.*;
+
+/*
+import estacionamento.Evento;
 import estacionamento.GerenciarAcessos;
 import estacionamento.GerenciarEstacionamento;
-
+ */
 
 public class Main {
 	
@@ -50,6 +54,7 @@ public class Main {
 			}
 			
 			case 5: {
+
 				GerenciarAcessos.relatorio(GerenciarAcessos.pesquisarAcessos());
 				break;
 			}

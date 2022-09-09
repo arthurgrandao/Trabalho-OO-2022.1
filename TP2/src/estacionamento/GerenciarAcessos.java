@@ -15,8 +15,6 @@ public abstract class GerenciarAcessos {
 
 	public static Estacionamento es = new Estacionamento();
 
-	public static Evento eve = new Evento();
-
 	public static Mensalista m = new Mensalista();
 
 	public static Turnos t = new Turnos();
@@ -25,22 +23,23 @@ public abstract class GerenciarAcessos {
 
 	public static Acessos a = new Acessos();
 
-
 	private static List<Acessos> acs = new LinkedList<Acessos>();;
 
 	public GerenciarAcessos() {
 	}
 
-
 	public static void cadrastrarAcesso() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		boolean roda = false;
 		do {
 			roda = false;
+			
 			Estacionamento estacionamento = null;
 			String tipo = JOptionPane.showInputDialog("Informe o tipo de Estacionamento");
+			
 			for (Estacionamento es : GerenciarEstacionamento.e) {
 				if (es.getTipoDeEstacionamento().equals(tipo)) {
 					estacionamento = es;
+					JOptionPane.showMessageDialog(null, "Estacionamento localizado!");
 				}
 			}
 
@@ -50,21 +49,22 @@ public abstract class GerenciarAcessos {
 			a.setPlaca(placa);
 			a.setDataEntrada(dataDeEntrada);
 			a.setDataSaida(dataDeSaida);
+			
 			int evento = JOptionPane.showConfirmDialog(null, "E do tipo Evento ?:");
 			if (evento == JOptionPane.YES_OPTION) { // Evento
-				eve.setEEvento(true);
+
+				String horaDeEnt_str = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
+				String horaDeSai_str = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 				String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
-				String inicioDoEvento = JOptionPane.showInputDialog("Informe a hora do Evento:");
-				String saidaDoEvento = JOptionPane.showInputDialog("Informe a saida do Evento:");
+				String inicioDoEvento = JOptionPane.showInputDialog("Informe o horário de início do Evento:");
+				String saidaDoEvento = JOptionPane.showInputDialog("Informe o horário de fim do Evento:");
 				String taxaDoEvento = JOptionPane.showInputDialog("Informe a taxa do Evento:");
-				int taxa = Integer.parseInt(taxaDoEvento);
 
-				eve.setNomeEvento(nomeDoEvento);
-				eve.setInicioEvento(inicioDoEvento);
-				eve.setFimEvento(saidaDoEvento);
-				eve.setTaxaFixaEve(taxa);
+				float taxaEve = Float.parseFloat(taxaDoEvento);
 
-				Evento.criarEvento(inicioDoEvento, saidaDoEvento, taxa, true, nomeDoEvento);
+				Evento eve = Evento.criarEvento(placa, dataDeEntrada, dataDeSaida, horaDeEnt_str, horaDeSai_str,
+						converterHora(horaDeEnt_str), converterHora(horaDeSai_str), true, false, false, false, nomeDoEvento, inicioDoEvento, saidaDoEvento,
+						taxaEve);
 
 				acs.add(eve);
 
@@ -79,24 +79,20 @@ public abstract class GerenciarAcessos {
 			}
 
 			else if (evento == JOptionPane.NO_OPTION) {
+				
 				int mensalista = JOptionPane.showConfirmDialog(null, "E do tipo Mensalista ?");
-
 				if (mensalista == JOptionPane.YES_OPTION) { // Mensalista
 					a.setMensalista(true);
-					String horaDeEnt = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
-					String horaDeSai = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
+					String horaDeEntrada_str = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
+					String horaDeSaida_str = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 
-					// String horaDeEntrada_str = Integer.toString(converterHora(horaDeEnt));
-					// String horaDeSaida_str = Integer.toString(converterHora(horaDeSai));
-
-					int horaDeEntrada = converterHora(horaDeEnt);
-					int horaDeSaida = converterHora(horaDeSai);
+					int horaDeEntrada = converterHora(horaDeEntrada_str);
+					int horaDeSaida = converterHora(horaDeSaida_str);
 
 					a.setHoraEntrada(horaDeEntrada);
 					a.setHoraSaida(horaDeSaida);
 
-					a = Mensalista.criarMensalista(placa, dataDeEntrada, dataDeSaida, false, true, false, false,
-							horaDeEntrada, horaDeSaida);
+					Mensalista a = Mensalista.criarMensalista(placa, dataDeEntrada, dataDeSaida, horaDeEntrada_str, horaDeSaida_str, horaDeEntrada, horaDeSaida, false, true, false, false);
 
 					acs.add(a);
 
@@ -210,7 +206,6 @@ public abstract class GerenciarAcessos {
 
 		return resposta;
 
-
 	}
 
 	public static int converterHora(String hora) {
@@ -225,22 +220,40 @@ public abstract class GerenciarAcessos {
 		Acessos comp = null;
 		if (a == comp) {
 			JOptionPane.showMessageDialog(null, "Objeto não encontrado.");
+		
 		} else {
 			String resposta = "Placa : " + a.getPlaca() + "\n";
-			resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
-			if (eve.getEEvento() == true) {
-				resposta += "Nome do Evento : " + eve.getNomeEvento() + "\n";
-				resposta += "Valor a pagar: " + eve.calcularValor();
-			} else if (a.isMensalista() == true) {
-				resposta += "Valor a pagar: " + m.calcularValor();
-			} else if (t.getTurnos() == true) {
-				resposta += "Valor a pagar: " + t.calcularValor();
-			} else if (hf.getHorasFracao() == true) {
-				resposta += "Valor a pagar: " + hf.calcularValor();
-			}
 
+			resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
+			 
+			if (a.isEvento() == true) {
+				Evento eve = (Evento) a;
+				
+				resposta += "Evento : " + eve.getNomeEvento() + "\n";
+				resposta += "Valor a pagar: R$" + eve.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + eve.calcularContratante() + "\n";
+			
+			} else if (a.isMensalista() == true) {
+				Mensalista m = (Mensalista) a;
+				
+				resposta += "Valor a pagar: R$" + m.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + m.calcularContratante() + "\n";
+			
+			} else if (a.getTurnos() == true) {
+				Turnos t = (Turnos) a;
+				
+				resposta += "Valor a pagar: R$" + t.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + t.calcularContratante() + "\n";
+			
+			} else if (a.getHorasFracao() == true) {
+				HorasFracao hf = (HorasFracao) a;
+
+				resposta += "Valor a pagar: R$" + hf.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + hf.calcularContratante() + "\n";
+			}
+			
 			resposta += "Data de entrada - saída: " + a.getDataEntrada() + " - " + a.getDataSaida() + "\n";
-			resposta += "Hora de entrada - saída: " + a.getHoraEntrada() + " - " + a.getHoraSaida() + "\n";
+			resposta += "Hora de entrada - saída: " + a.getHoraEntrada_str() + " - " + a.getHoraSaida_str() + "\n";
 
 			JOptionPane.showMessageDialog(null, resposta);
 			;

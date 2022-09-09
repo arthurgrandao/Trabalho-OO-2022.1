@@ -9,8 +9,10 @@ public class Acessos {
 
 	protected String placa = "";
 
-	protected String dataEntrada = "";
-	protected String dataSaida = "";
+	protected String dataEntrada = "",
+					 dataSaida = "",
+					 horaEntrada_str = "",
+					 horaSaida_str = "";
 
 	protected int horaEntrada = 0,
 			horaSaida = 0;
@@ -20,17 +22,20 @@ public class Acessos {
 			turnos = false,
 			horasfracao = false;
 
-	public Acessos(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
-			int horaEntrada, int horaSaida) {		
+	public Acessos(String placa, String dataEntrada, String dataSaida, 
+				   String horaEntrada_str, String horaSaida_str, int horaEntrada, int horaSaida,
+				   boolean evento, boolean mensalista, boolean turnos, boolean horasfracao) {		
 		this.placa = placa;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
+		this.horaEntrada_str = horaEntrada_str;
+		this.horaSaida_str = horaSaida_str;
+		this.horaEntrada = horaEntrada;
+		this.horaSaida = horaSaida;
 		this.evento = evento;
 		this.mensalista = mensalista;
 		this.turnos = turnos;
-		this.horasfracao= horasfracao;
-		this.horaEntrada = horaEntrada;
-		this.horaSaida = horaSaida;
+		this.horasfracao = horasfracao;
 	}
 
 	public Acessos() {
@@ -108,15 +113,25 @@ public class Acessos {
 		this.mensalista = mensalista;
 	}
 
-	public static Acessos criarAcesso(String placa, String dataEntrada, String dataSaida, boolean evento, boolean mensalista, boolean turnos, boolean horasfracao, 
-			int horaEntrada, int horaSaida)
+	public String getHoraEntrada_str() {
+        return horaEntrada_str;
+    }
+
+    public String getHoraSaida_str() {
+        return horaSaida_str;
+    }
+	
+	public static Acessos criarAcesso(String placa, String dataEntrada, String dataSaida, String horaEntrada_str, String horaSaida_str, int horaEntrada, int horaSaida, boolean evento, boolean mensalista, boolean turnos,
+	boolean horasfracao)
 			throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		if (placa.equalsIgnoreCase("") || dataEntrada.equalsIgnoreCase("") || dataSaida.equalsIgnoreCase("")) {
 			throw new DescricaoEmBrancoException();
 		} else if (horaEntrada < 0 || horaSaida < 0) {
 			throw new ValorAcessoInvalidoException();
 		}
-		Acessos a = new Acessos(placa, dataEntrada, dataSaida, evento, mensalista, turnos, horasfracao, horaEntrada,  horaSaida);
+		Acessos a = new Acessos(placa, dataEntrada, dataSaida, horaEntrada_str, horaSaida_str, horaEntrada,  horaSaida,  evento, mensalista, turnos, horasfracao);
 		return a;
 	}
+
+    
 }
