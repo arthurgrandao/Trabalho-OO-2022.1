@@ -13,20 +13,9 @@ import exceptions.ValorAcessoInvalidoException;
 
 public abstract class GerenciarAcessos {
 
-	//public static Estacionamento es = new Estacionamento();
-
-	//public static Mensalista m = new Mensalista();
-
-	//public static Turnos t = new Turnos();
-
-	//public static HorasFracao hf = new HorasFracao();
-
 	public static Acessos a = new Acessos();
 
 	private static List<Acessos> acs = new LinkedList<Acessos>();;
-
-	public GerenciarAcessos() {
-	}
 
 	public static void cadrastrarAcesso() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		boolean roda = false;
@@ -116,9 +105,6 @@ public abstract class GerenciarAcessos {
 					int horaDeAbrir = converterHora(estacionamento.getHoraDeAbrir());
 					int horaDeFechar = converterHora(estacionamento.getHoraDeFechar());
 
-					//a.setHoraEntrada(horaDeEntrada);
-					//a.setHoraSaida(horaDeSaida);
-
 					if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
 						JOptionPane.showMessageDialog(null, "Horario Invalido.");
 						;
@@ -127,13 +113,6 @@ public abstract class GerenciarAcessos {
 					}
 					a = Acessos.criarAcesso(placa, estacionamento, dataDeEntrada, dataDeSaida, horaDeEnt, horaDeSai, horaDeEntrada, horaDeSaida, false, false);
 					acs.add(a);
-
-
-					/*
-					 * a = Acessos.criarAcesso(placa, dataDeEntrada, dataDeSaida, false, false,
-					 * horaDeEntrada,
-					 * horaDeSaida);
-					 */
 
 					/*
 					 * try {
@@ -153,6 +132,7 @@ public abstract class GerenciarAcessos {
 
 	public static Acessos buscarAcessos(String placa) throws ObjetoNaoEncontradoException {
 		Acessos n = null;
+		
 		if (acs.size() > 0) {
 			for (Acessos a : acs) {
 				String placa1 = a.getPlaca();
@@ -166,7 +146,7 @@ public abstract class GerenciarAcessos {
 	}
 
 	public static Acessos pesquisarAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException { // ToString
-		String placa = JOptionPane.showInputDialog("Digite a placa ?");
+		String placa = JOptionPane.showInputDialog("Digite a placa: ");
 		if (placa == null) {
 			throw new DescricaoEmBrancoException();
 		}
@@ -232,22 +212,10 @@ public abstract class GerenciarAcessos {
 			} else if (a.isMensalista() == true) {
 				Mensalista m = (Mensalista) a;
 				
-				resposta += "Mensalista.\n";
+				resposta += "Mensalista\n";
 				resposta += "Valor a pagar: R$" + m.calcularValor() + "\n";
 				resposta += "Valor do contratante: R$" + m.calcularContratante() + "\n";
-			/*  
-			} else if (a.getTurnos() == true) {
-				Turnos t = (Turnos) a;
 
-				resposta += "Valor a pagar: R$" + t.calcularValor() + "\n";
-				resposta += "Valor do contratante: R$" + t.calcularContratante() + "\n";
-			
-			} else if (a.getHorasFracao() == true) {
-				HorasFracao hf = (HorasFracao) a;
-
-				resposta += "Valor a pagar: R$" + hf.calcularValor() + "\n";
-				resposta += "Valor do contratante: R$" + hf.calcularContratante() + "\n";
-			*/
 			} else {
 				resposta += "Valor a pagar: R$" + a.calcularValor() + "\n";
 				resposta += "Valor do contratante: R$" + a.calcularContratante() + "\n";

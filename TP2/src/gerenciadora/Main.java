@@ -41,7 +41,7 @@ public class Main {
 				break;
 			}
 			case 2: {
-				GerenciarEstacionamento.pesquisarEstacionamento();
+				GerenciarEstacionamento.relatorio(GerenciarEstacionamento.pesquisarEstacionamento());
 				break;
 			}
 			case 3: {
@@ -54,7 +54,6 @@ public class Main {
 			}
 			
 			case 5: {
-
 				GerenciarAcessos.relatorio(GerenciarAcessos.pesquisarAcessos());
 				break;
 			}

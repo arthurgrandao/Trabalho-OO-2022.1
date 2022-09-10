@@ -4,7 +4,6 @@ import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
 public class Mensalista extends Acessos {
-	Estacionamento es = null;
 	
 	public Mensalista(String placa, Estacionamento es,String dataEntrada, String dataSaida,String horaEntrada_str, String horaSaida_str, 
 			int horaEntrada, int horaSaida, boolean evento, boolean mensalista) {		

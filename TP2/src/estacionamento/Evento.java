@@ -4,17 +4,13 @@ import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
 public class Evento extends Acessos {
-
-	Estacionamento es = null;
 	
 	private String inicioEvento,
 			fimEvento, nomeEvento;
 
 	protected float taxaFixaEve;
 
-	boolean eEvento;
-
-	public Evento(String placa, Estacionamento es,String dataEntrada, String dataSaida,
+	public Evento(String placa, Estacionamento es, String dataEntrada, String dataSaida,
 			String horaEntrada_str, String horaSaida_str, int horaEntrada, int horaSaida, boolean evento,
 			boolean mensalista, String inicioEvento,
 			String fimEvento, float taxaFixaEve, String nomeEvento) {
@@ -30,24 +26,12 @@ public class Evento extends Acessos {
 	public Evento() {
 	}
 
-	public Estacionamento getEstacionamento() {
-		return es;
-	}
-
 	public String getNomeEvento() {
 		return nomeEvento;
 	}
 
 	public void setNomeEvento(String nomeEvento) {
 		this.nomeEvento = nomeEvento;
-	}
-
-	public boolean getEEvento() {
-		return eEvento;
-	}
-
-	public void setEEvento(boolean eEvento) {
-		this.eEvento = eEvento;
 	}
 
 	public String getInicioEvento() {

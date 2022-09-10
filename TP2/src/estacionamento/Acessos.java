@@ -91,23 +91,7 @@ public class Acessos {
 	public void setEvento(boolean evento) {
 		this.evento = evento;
 	}
-/* 	
-	public boolean getTurnos() {
-		return turnos;
-	}
 
-	public void setTurnos(boolean turnos) {
-		this.turnos = turnos;
-	}
-
-	public boolean getHorasFracao() {
-		return horasfracao;
-	}
-
-	public void setHorasFracao(boolean horasfracao) {
-		this.horasfracao = horasfracao;
-	}
-*/
 	public boolean isMensalista() {
 		return mensalista;
 	}
@@ -131,9 +115,9 @@ public class Acessos {
 		String dataDeEntrada = getDataEntrada();
 		String dataDeSaida = getDataSaida();
 
-		if (dataDeEntrada != dataDeSaida && confirma < 540) {
+		if (dataDeEntrada != dataDeSaida && confirma >= 540) {
 			noturno = true;
-		} else if (dataDeEntrada != dataDeSaida && confirma >= 540) {
+		} else if (dataDeEntrada != dataDeSaida && confirma < 540) {
 			noturno = false;
 		}
 		return noturno;
@@ -152,7 +136,7 @@ public class Acessos {
 		} else {
 			int dias = Integer.parseInt(dataDeSaida.substring(0,2)) - Integer.parseInt(dataDeEntrada.substring(0,2));
 
-			temp = ((24 * 60) - horaDeEntrada) +  (dias * (24 * 60)) + horaDeSaida; // 24*60 = Meia-noite
+			temp = ((24 * 60) - horaDeEntrada) +  ((dias-1)*(24 * 60)) + horaDeSaida; // 24*60 = Meia-noite
 		}
 
 		return temp;

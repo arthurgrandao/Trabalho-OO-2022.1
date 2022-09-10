@@ -1,7 +1,7 @@
 package estacionamento;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -107,22 +107,26 @@ public class GerenciarEstacionamento {
 	}
 	
 	public static Estacionamento buscarEstacionamento(String tipo) throws ObjetoNaoEncontradoException{
-		Iterator<Estacionamento> ip = e.iterator();
-		while(ip.hasNext()) {
-			Estacionamento estacio = ip.next();
-		if (estacio.getTipoDeEstacionamento().equalsIgnoreCase(tipo)) {
-		}else {
-			throw new ObjetoNaoEncontradoException(null);
+		Estacionamento estacio = null;
+		if (e.size() > 0) {
+			for (Estacionamento es : e) {
+				String tipo_ = es.getTipoDeEstacionamento();
+				if (tipo_.equals(tipo)) {
+					estacio = es;
+					return estacio;
+				}
+			}
 		}
-		}return estacio;
+		return estacio;
 	}
 	
 	public static Estacionamento pesquisarEstacionamento() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException { //ToString
-		String tipo = JOptionPane.showInputDialog("Digite o tipo de Estacionamento ?");
+		String tipo = JOptionPane.showInputDialog("Digite o tipo de Estacionamento: ");
 		if(tipo == null) {
 			throw new DescricaoEmBrancoException();
 		}
 		Estacionamento resposta = buscarEstacionamento(tipo);
+		
 		return resposta;
 		}
 	
@@ -131,12 +135,27 @@ public class GerenciarEstacionamento {
 		return null;
 	}
 
-	public static int converterHora(String hora) {
-		String horari = hora.substring(0, 2);
-		String minut = hora.substring(3, 5);
-		int horario = Integer.parseInt(horari);
-		int minutos = Integer.parseInt(minut);
-		return (60 * horario) + minutos;
+	public static void relatorio(Estacionamento estacio) {
+		Estacionamento comp = null;
+		
+		if (estacio == comp) {
+			JOptionPane.showMessageDialog(null, "Estacionamento não encontrado.");
+		
+		}else {
+			JOptionPane.showMessageDialog(null, "Estacionamento encontrado!");
+			
+			String resposta = "Tipo : " + estacio.getTipoDeEstacionamento() + "\n" +
+							  "Capacidade : " + estacio.getCapacidade() + "\n" +
+							  "Hora de abrir : " + estacio.getHoraDeAbrir() + "\n" +
+							  "Hora de fechar : " + estacio.getHoraDeFechar() + "\n" +
+							  "Desconto sobre hora heia : " + estacio.getDescontoHora() + "\n" +
+							  "Taxa do contratante : " + estacio. getContratante() + "%\n" +
+							  "Valor da diária diurna : R$" + estacio.getTaxaDiaria() + "\n" +
+							  "Taxa da diária noturna  : " + estacio.getTaxaNoturno() + "%\n" +
+							  "Taxa fixa mensal : R$" + estacio.getTaxaFixaMensal() + "\n" +
+							  "Valor da fração : R$" + estacio.getValorFracao();
+		
+			JOptionPane.showMessageDialog(null, resposta);
+		}
 	}
-
 }
