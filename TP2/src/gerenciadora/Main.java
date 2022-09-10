@@ -27,7 +27,9 @@ public class Main {
 			menu += "2 - Pesquisar Estacionamento" + '\n';
 			menu += "3 - Cadastrar Acessos" + '\n';
 			menu += "4 - Remover Acessos" + '\n';
-			menu += "5 - Pesquisar Acessos";
+			menu += "5 - Atualizar Acessos" + '\n';
+			menu += "6 - Pesquisar Acessos" + '\n';
+			menu += "0 - Sair";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
 			opcao = Integer.parseInt(strOpcao);
@@ -49,17 +51,23 @@ public class Main {
 				break;
 			}
 			case 4: {
-				GerenciarAcessos.removerAcessos();
+				GerenciarAcessos.removerAcessos(GerenciarAcessos.escolherAcesso());
 				break;
 			}
 			
 			case 5: {
-				GerenciarAcessos.relatorio(GerenciarAcessos.pesquisarAcessos());
+				GerenciarAcessos.atualizarAcesso(GerenciarAcessos.escolherAcesso());
 				break;
 			}
+
+			case 6: {
+				GerenciarAcessos.relatorio(GerenciarAcessos.buscarAcessos());
+				break;
+			}
+
 			
 			default:
-				opcao = -1; 
+				opcao = 0; 
 			}
 
 		} while (opcao != 0);

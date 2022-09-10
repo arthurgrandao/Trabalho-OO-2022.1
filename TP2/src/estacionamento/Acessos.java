@@ -104,10 +104,18 @@ public class Acessos {
         return horaEntrada_str;
     }
 
+	public void setHoraEntrada_str(String horaEntrada_str) {
+		this.horaEntrada_str = horaEntrada_str;
+	}
+
     public String getHoraSaida_str() {
         return horaSaida_str;
     }
 	
+	public void setHoraSaida_str(String horaSaida_str) {
+		this.horaSaida_str = horaSaida_str;
+	}
+
 	public boolean isNoturno() {
 		boolean noturno = false;
 		int confirma = calcularTempo();
