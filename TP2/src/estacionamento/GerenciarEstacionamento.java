@@ -1,7 +1,6 @@
 package estacionamento;
 
 import java.util.ArrayList;
-//import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -71,11 +70,16 @@ public class GerenciarEstacionamento {
 		try {
 			estacio = Estacionamento.criarEstacionamento(tipo, hrabrir, hrfechar, capacidade, horacheia, contra, diaria,
 					noturno, mensal, valor);
-
 		} catch (DescricaoEmBrancoException u) {
 			u.printStackTrace();
 		} catch (ValorAcessoInvalidoException u) {
 			u.printStackTrace();
+		}finally {
+			int opcao = JOptionPane.showConfirmDialog(null, "Gostaria de refazer o cadastro?");
+			if (opcao == JOptionPane.YES_OPTION) {
+					GerenciarAcessos.cadrastrarAcesso();
+		
+			}
 		}
 		
 		e.add(estacio);

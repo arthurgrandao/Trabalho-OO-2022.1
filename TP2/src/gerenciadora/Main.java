@@ -21,22 +21,19 @@ public class Main {
 		
 		int opcao = 0; 
 		do {
-			String menu = ""; 
-			menu += "Informe a opcao desejada: " + '\n'; 
-			menu += "1 - Cadastrar Estacioamento" + '\n';
-			menu += "2 - Pesquisar Estacionamento" + '\n';
-			menu += "3 - Cadastrar Acessos" + '\n';
-			menu += "4 - Remover Acessos" + '\n';
-			menu += "5 - Atualizar Acessos" + '\n';
-			menu += "6 - Pesquisar Acessos" + '\n';
-			menu += "0 - Sair";
+			String menu = "Informe a opcao desejada:\n" +
+						  "1 - Cadastrar Estacioamento\n" +
+						  "2 - Pesquisar Estacionamento\n" +
+						  "3 - Cadastrar Acessos\n" +
+						  "4 - Remover Acessos\n" +
+						  "5 - Atualizar Acessos\n" +
+						  "6 - Pesquisar Acessos\n" +
+						  "0 - Sair";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
 			opcao = Integer.parseInt(strOpcao);
 
 
-
-			
 			switch (opcao) {
 			case 1: {
 				GerenciarEstacionamento.cadrastrarEstacionamento();

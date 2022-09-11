@@ -1,5 +1,7 @@
 package estacionamento;
 
+//import javax.swing.JOptionPane;
+
 import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
@@ -117,13 +119,45 @@ public class Estacionamento {
 			String horaDeFechar, int capacidade, float descontoHora, float contratante, int taxaDiaria,
 			float taxaNoturno, int taxaFixaMensal, int valorFracao)
 			throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
-		if (tipoDeEstacionamento.equalsIgnoreCase("") || horaDeAbrir.equalsIgnoreCase("")
+		
+			if (tipoDeEstacionamento.equalsIgnoreCase("") || horaDeAbrir.equalsIgnoreCase("")
 				|| horaDeFechar.equalsIgnoreCase("")) {
 			throw new DescricaoEmBrancoException();
 		} else if (capacidade <= 0 || descontoHora <= 0 || contratante <= 0 || taxaDiaria <= 0 || taxaNoturno <= 0
 				|| taxaFixaMensal <= 0 || valorFracao <= 0) {
 			throw new ValorAcessoInvalidoException();		
 		}
+
+		try {
+			if (horaDeAbrir.length() > 5 || horaDeFechar.length() > 5 || horaDeAbrir.length() < 5 || horaDeFechar.length() < 5) {
+				throw new ValorAcessoInvalidoException();
+			}
+		} catch (ValorAcessoInvalidoException u) {
+			u.printStackTrace();
+		}
+		
+		try {
+			Integer.parseInt(horaDeAbrir.substring(0,2) + horaDeFechar.substring(3,5));
+		
+		} catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
+		}
+		
+		if (Integer.parseInt(horaDeAbrir.substring(0,2)) >= 24 || (Integer.parseInt(horaDeAbrir.substring(0,2)) == 24 && Integer.parseInt(horaDeAbrir.substring(3,5)) != 0)) {
+				throw new ValorAcessoInvalidoException();
+		}
+		
+		if (Integer.parseInt(horaDeAbrir.substring(3,5)) >= 60) {
+			throw new ValorAcessoInvalidoException();
+		}
+		if (Integer.parseInt(horaDeFechar.substring(0,2)) >= 24 || (Integer.parseInt(horaDeFechar.substring(0,2)) == 24 && Integer.parseInt(horaDeFechar.substring(3,5)) != 0)) {
+			throw new ValorAcessoInvalidoException();
+		}
+		
+		if (Integer.parseInt(horaDeFechar.substring(3,5)) >= 60) {
+			throw new ValorAcessoInvalidoException();
+		}
+		
 
 		Estacionamento estacio = new Estacionamento(tipoDeEstacionamento, horaDeAbrir, horaDeFechar, capacidade,
 				descontoHora, contratante, taxaDiaria, taxaNoturno, taxaFixaMensal, valorFracao);
