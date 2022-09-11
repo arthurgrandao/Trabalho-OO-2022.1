@@ -6,4 +6,7 @@ public class ObjetoNaoEncontradoException extends Exception {
 	public ObjetoNaoEncontradoException(Estacionamento estacio) {
 
 	}
+
+    public ObjetoNaoEncontradoException() {
+    }
 }

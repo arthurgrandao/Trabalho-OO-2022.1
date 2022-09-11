@@ -78,16 +78,11 @@ public class GerenciarEstacionamento {
 			int opcao = JOptionPane.showConfirmDialog(null, "Gostaria de refazer o cadastro?");
 			if (opcao == JOptionPane.YES_OPTION) {
 					GerenciarAcessos.cadrastrarAcesso();
-		
 			}
 		}
 		
 		e.add(estacio);
 
-	}
-	
-	public boolean addEstacionamento() {
-		return e.add(estacio);
 	}
 
 	public void ligarAcesso(Acessos a) {
@@ -100,62 +95,59 @@ public class GerenciarEstacionamento {
 		ga = temp;
 	}
 	
-	public static Estacionamento buscarEstacionamento(String tipo) throws ObjetoNaoEncontradoException{
-		Estacionamento estacio = null;
-		if (e.size() > 0) {
-			for (Estacionamento es : e) {
-				String tipo_ = es.getTipoDeEstacionamento();
-				if (tipo_.equals(tipo)) {
-					estacio = es;
-					return estacio;
+	public static Estacionamento buscarEstacionamento() throws ObjetoNaoEncontradoException, DescricaoEmBrancoException {		
+		try {
+			String tipo = JOptionPane.showInputDialog("Digite o tipo de Estacionamento: ");
+			
+			if(tipo == null) {
+				throw new DescricaoEmBrancoException();
+			}
+			
+			if (e.size() > 0) {
+				for (Estacionamento es : e) {
+					String tipo_ = es.getTipoDeEstacionamento();
+					if (tipo_.equals(tipo)) {
+						estacio = es;
+					}
 				}
+			} else {
+				throw new ObjetoNaoEncontradoException();
 			}
-		}
+		
+		} catch (DescricaoEmBrancoException u) {
+			u.printStackTrace();
+
+		} catch (ObjetoNaoEncontradoException u) {
+			u.printStackTrace();
+		} 
+		
 		return estacio;
-	}
-	
-	public static Estacionamento pesquisarEstacionamento() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException { //ToString
-		String tipo = JOptionPane.showInputDialog("Digite o tipo de Estacionamento: ");
-		if(tipo == null) {
-			throw new DescricaoEmBrancoException();
-		}
-		Estacionamento resposta = buscarEstacionamento(tipo);
-		
-		return resposta;
 		}
 	
 
-	public String calcularTotalEstacionamento(float totalContratante) {
-		return null;
-	}
-
-	public static void relatorio(Estacionamento estacio) {
-		Estacionamento comp = null;
-		
-		if (estacio == comp) {
-			JOptionPane.showMessageDialog(null, "Estacionamento não encontrado.");
-		
-		}else {
-			JOptionPane.showMessageDialog(null, "Estacionamento encontrado!");
+	public static float calcularTotalEstacionamento() {
+		float contr = 0.0f;
 			
-			float contr = 0.0f;
-			for (Acessos a : GerenciarAcessos.acs) {
+		for (Acessos a : GerenciarAcessos.acs) {
 				contr += a.calcularContratante();
-			}
-			
-			String resposta = "Tipo : " + estacio.getTipoDeEstacionamento() + "\n" +
-							  "Capacidade : " + estacio.getCapacidade() + "\n" +
-							  "Hora de abrir : " + estacio.getHoraDeAbrir() + "\n" +
-							  "Hora de fechar : " + estacio.getHoraDeFechar() + "\n" +
-							  "Desconto sobre hora heia : " + estacio.getDescontoHora() + "%\n" +
-							  "Taxa do contratante : " + estacio. getContratante() + "%\n" +
-							  "Valor da diária diurna : R$" + estacio.getTaxaDiaria() + "\n" +
-							  "Taxa da diária noturna  : " + estacio.getTaxaNoturno() + "%\n" +
-							  "Taxa fixa mensal : R$" + estacio.getTaxaFixaMensal() + "\n" +
-							  "Valor da fração : R$" + estacio.getValorFracao() + "\n\n" +
-							  "Total arrecadado: R$" + contr;
-		
-			JOptionPane.showMessageDialog(null, resposta);
 		}
+		return contr;
+	}
+
+	public static void relatorio(Estacionamento estacio) throws ObjetoNaoEncontradoException {
+		String resposta = "Tipo : " + estacio.getTipoDeEstacionamento() + "\n" +
+						  "Capacidade : " + estacio.getCapacidade() + "\n" +
+						  "Hora de abrir : " + estacio.getHoraDeAbrir() + "\n" +
+						  "Hora de fechar : " + estacio.getHoraDeFechar() + "\n" +
+						  "Desconto sobre hora heia : " + estacio.getDescontoHora() + "%\n" +
+						  "Taxa do contratante : " + estacio. getContratante() + "%\n" +
+						  "Valor da diária diurna : R$" + estacio.getTaxaDiaria() + "\n" +
+						  "Taxa da diária noturna  : " + estacio.getTaxaNoturno() + "%\n" +
+						  "Taxa fixa mensal : R$" + estacio.getTaxaFixaMensal() + "\n" +
+						  "Valor da fração : R$" + estacio.getValorFracao() + "\n\n" +
+						  "Total arrecadado: R$" + calcularTotalEstacionamento();
+	
+		JOptionPane.showMessageDialog(null, resposta);
+		
 	}
 }

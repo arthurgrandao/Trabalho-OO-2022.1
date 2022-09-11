@@ -8,11 +8,6 @@ import javax.swing.JOptionPane;
 
 import estacionamento.*;
 
-/*
-import estacionamento.Evento;
-import estacionamento.GerenciarAcessos;
-import estacionamento.GerenciarEstacionamento;
- */
 
 public class Main {
 	
@@ -40,14 +35,14 @@ public class Main {
 				break;
 			}
 			case 2: {
-				GerenciarEstacionamento.relatorio(GerenciarEstacionamento.pesquisarEstacionamento());
+				GerenciarEstacionamento.relatorio(GerenciarEstacionamento.buscarEstacionamento());
 				break;
 			}
 			case 3: {
 				GerenciarAcessos.cadrastrarAcesso();
 				break;
 			}
-			case 4: {
+			case 4: {	
 				GerenciarAcessos.removerAcessos(GerenciarAcessos.escolherAcesso());
 				break;
 			}

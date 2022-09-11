@@ -124,17 +124,17 @@ public abstract class GerenciarAcessos {
 		}
 	}
 
-	public boolean addAcessos() {
-		return acs.add(a);
-	}
-
-	public static List<Acessos> buscarAcessos() throws ObjetoNaoEncontradoException, DescricaoEmBrancoException {
+	public static List<Acessos> buscarAcessos() throws DescricaoEmBrancoException, ObjetoNaoEncontradoException {
 		String placa = JOptionPane.showInputDialog("Digite a placa: ");
-		 
-		if (placa == null) {
-			throw new DescricaoEmBrancoException();
+
+		try {
+			if (placa == null) {
+				throw new DescricaoEmBrancoException();
+			}
+		} catch (DescricaoEmBrancoException u) {
+			u.printStackTrace();
 		}
-		
+
 		List<Acessos> acessos = new ArrayList<>();
 		
 		if (acs.size() > 0) {
@@ -145,29 +145,46 @@ public abstract class GerenciarAcessos {
 				}
 			}
 		}
+
+		if (acessos.size() == 0) {
+			throw new ObjetoNaoEncontradoException();
+		}
+		
 		return acessos;
 	}
 
 	public static Acessos escolherAcesso() throws ObjetoNaoEncontradoException, DescricaoEmBrancoException {
-		List<Acessos> acessos = buscarAcessos();
-		String resposta = "Acessos: (Placa / Hora de Entrada)\n";
-		int i = 1;
-
-		if (acessos.size()>0) {
-			for (Acessos a : acessos) {
-				resposta +=  i + "- Acesso: ("+a.getPlaca()+" / "+a.getHoraEntrada_str()+")\n";
-				i++;
-				}
-			
-			String op = JOptionPane.showInputDialog(resposta);
-			int opcao = Integer.parseInt(op);
-			
-			return acessos.get(opcao-1);
+		Acessos padrao = null;
 		
-		} else {
-			throw new ObjetoNaoEncontradoException(null);
+		try {
+			List<Acessos> acessos = buscarAcessos();
+			String resposta = "Acessos: (Placa / Hora de Entrada)\n";
+			int i = 1;
+
+			if (acessos.size() > 0) {
+				for (Acessos a : acessos) {
+					resposta +=  i + "- Acesso: ("+a.getPlaca()+" / "+a.getHoraEntrada_str()+")\n";
+					i++;
+					}
+				
+				String op = JOptionPane.showInputDialog(resposta);
+				
+				if (op.equalsIgnoreCase("")) {
+					throw new DescricaoEmBrancoException();
+				}
+				int opcao = Integer.parseInt(op);
+
+			return acessos.get(opcao-1);
+			}
+		} catch (ObjetoNaoEncontradoException u) {
+			u.printStackTrace();
+		} catch (DescricaoEmBrancoException u) {
+			u.printStackTrace();
 		}
+		
+		return padrao;
 	}
+	
 	
 	public static void atualizarAcesso(Acessos a) throws DescricaoEmBrancoException { // Mudar
 		int opcao = 0; 
@@ -181,6 +198,15 @@ public abstract class GerenciarAcessos {
 				   menu += "0 - Sair";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
+			
+		   try {
+				if (strOpcao.equalsIgnoreCase("")) {
+					throw new DescricaoEmBrancoException();
+				}
+			} catch (DescricaoEmBrancoException u) {
+				u.printStackTrace();
+			}
+			
 			opcao = Integer.parseInt(strOpcao);
 
 			switch (opcao) {
@@ -226,45 +252,31 @@ public abstract class GerenciarAcessos {
 		return (60 * horario) + minutos;
 	}
 
-	public static void relatorio(List<Acessos> acessos) {
-		
-		if (acessos.size() == 0) {
-			JOptionPane.showMessageDialog(null, "Objeto não encontrado.");
-		
-		} else {
-			for (Acessos a : acessos) {	
-				Estacionamento es = a.getEstacionamento();
+	public static void relatorio(List<Acessos> acessos) throws ObjetoNaoEncontradoException {
+		for (Acessos a : acessos) {	
+			Estacionamento es = a.getEstacionamento();
+			String resposta = "Placa : " + a.getPlaca() + "\n";
+			resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
+			if (a.isEvento() == true) {
+				Evento eve = (Evento) a;
+				resposta += "Evento : " + eve.getNomeEvento() + "\n";
+				resposta += "Valor a pagar: R$" + eve.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + eve.calcularContratante() + "\n";
+			
+			} else if (a.isMensalista() == true) {
+				Mensalista m = (Mensalista) a;
+				resposta += "Mensalista\n";
+				resposta += "Valor a pagar: R$" + m.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + m.calcularContratante() + "\n";
+			} else {
+				resposta += "Valor a pagar: R$" + a.calcularValor() + "\n";
+				resposta += "Valor do contratante: R$" + a.calcularContratante() + "\n";
+			}
+			resposta += "Data de entrada - saída: " + a.getDataEntrada() + " - " + a.getDataSaida() + "\n";
+			resposta += "Hora de entrada - saída: " + a.getHoraEntrada_str() + " - " + a.getHoraSaida_str() + "\n";
+			JOptionPane.showMessageDialog(null, resposta);
+	}
 
-				String resposta = "Placa : " + a.getPlaca() + "\n";
-
-				resposta += "Tipo Do Estacionamento : " + es.getTipoDeEstacionamento() + "\n";
-
-				if (a.isEvento() == true) {
-					Evento eve = (Evento) a;
-
-					resposta += "Evento : " + eve.getNomeEvento() + "\n";
-					resposta += "Valor a pagar: R$" + eve.calcularValor() + "\n";
-					resposta += "Valor do contratante: R$" + eve.calcularContratante() + "\n";
-				
-				} else if (a.isMensalista() == true) {
-					Mensalista m = (Mensalista) a;
-
-					resposta += "Mensalista\n";
-					resposta += "Valor a pagar: R$" + m.calcularValor() + "\n";
-					resposta += "Valor do contratante: R$" + m.calcularContratante() + "\n";
-
-				} else {
-					resposta += "Valor a pagar: R$" + a.calcularValor() + "\n";
-					resposta += "Valor do contratante: R$" + a.calcularContratante() + "\n";
-				}
-
-				resposta += "Data de entrada - saída: " + a.getDataEntrada() + " - " + a.getDataSaida() + "\n";
-				resposta += "Hora de entrada - saída: " + a.getHoraEntrada_str() + " - " + a.getHoraSaida_str() + "\n";
-
-				JOptionPane.showMessageDialog(null, resposta);
-		}
-
-		}
 	}
 
 }
