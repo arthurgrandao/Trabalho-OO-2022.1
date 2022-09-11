@@ -1,6 +1,5 @@
 package estacionamento;
 
-//import javax.swing.JOptionPane;
 
 import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
@@ -21,8 +20,7 @@ public class Acessos {
 
 	protected boolean evento = false,
 			mensalista = false;
-			//turnos = false,
-			//horasfracao = false;
+
 
 	public Acessos(String placa, Estacionamento es, String dataEntrada, String dataSaida,  
 				   String horaEntrada_str, String horaSaida_str, int horaEntrada, int horaSaida,

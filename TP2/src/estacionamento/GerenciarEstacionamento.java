@@ -50,7 +50,7 @@ public class GerenciarEstacionamento {
 		}
 
 		String capa = JOptionPane.showInputDialog("Informe a Capacidade de Vagas");
-		String valo = JOptionPane.showInputDialog("Informe o Valor Da Fra√ß√£o");
+		String valo = JOptionPane.showInputDialog("Informe o Valor Da FraÁ„o");
 		String hrcheia = JOptionPane.showInputDialog("Informe o Valor Do Desconto sobre a Hora Cheia");
 		String dia = JOptionPane.showInputDialog("Informe o Valor da Diaria Diurna");
 		String not = JOptionPane.showInputDialog("Informe a Porcentagem da Diaria Noturna");
@@ -141,10 +141,10 @@ public class GerenciarEstacionamento {
 						  "Hora de fechar : " + estacio.getHoraDeFechar() + "\n" +
 						  "Desconto sobre hora heia : " + estacio.getDescontoHora() + "%\n" +
 						  "Taxa do contratante : " + estacio. getContratante() + "%\n" +
-						  "Valor da di√°ria diurna : R$" + estacio.getTaxaDiaria() + "\n" +
-						  "Taxa da di√°ria noturna  : " + estacio.getTaxaNoturno() + "%\n" +
+						  "Valor da di·ria diurna : R$" + estacio.getTaxaDiaria() + "\n" +
+						  "Taxa da di·ria noturna  : " + estacio.getTaxaNoturno() + "%\n" +
 						  "Taxa fixa mensal : R$" + estacio.getTaxaFixaMensal() + "\n" +
-						  "Valor da fra√ß√£o : R$" + estacio.getValorFracao() + "\n\n" +
+						  "Valor da fraÁ„o : R$" + estacio.getValorFracao() + "\n\n" +
 						  "Total arrecadado: R$" + calcularTotalEstacionamento();
 	
 		JOptionPane.showMessageDialog(null, resposta);

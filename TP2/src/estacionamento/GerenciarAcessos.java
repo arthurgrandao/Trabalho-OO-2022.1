@@ -39,8 +39,8 @@ public abstract class GerenciarAcessos {
 			String horaDeEnt_str = JOptionPane.showInputDialog("Informe a hora de Entrada: (HH:mm)");
 			String horaDeSai_str = JOptionPane.showInputDialog("Informe a hora de Saida: (HH:mm)");
 			String nomeDoEvento = JOptionPane.showInputDialog("Informe o Nome do Evento:");
-			String inicioDoEvento = JOptionPane.showInputDialog("Informe o hor√°rio de in√≠cio do Evento:");
-			String saidaDoEvento = JOptionPane.showInputDialog("Informe o hor√°rio de fim do Evento:");
+			String inicioDoEvento = JOptionPane.showInputDialog("Informe o hor·rio de inÌcio do Evento:");
+			String saidaDoEvento = JOptionPane.showInputDialog("Informe o hor·rio de fim do Evento:");
 			String taxaDoEvento = JOptionPane.showInputDialog("Informe a taxa do Evento:");
 			
 			float taxaEve = Float.parseFloat(taxaDoEvento);
@@ -102,7 +102,7 @@ public abstract class GerenciarAcessos {
 				int horaDeFechar = converterHora(estacionamento.getHoraDeFechar());
 				
 				if (horaDeEntrada <= horaDeAbrir || horaDeFechar <= horaDeSaida) {
-					JOptionPane.showMessageDialog(null, "Horario Invalido.");
+					JOptionPane.showMessageDialog(null, "Hor·rio Invalido.");
 					throw new ValorAcessoInvalidoException();
 				}
 				
@@ -192,9 +192,9 @@ public abstract class GerenciarAcessos {
 			String menu = ""; 
 				   menu += "Informe o atributo que deseja alterar: " + '\n'; 
 				   menu += "1 - Data de entrada" + '\n';
-				   menu += "2 - Data de sa√≠da" + '\n';
+				   menu += "2 - Data de saÌda" + '\n';
 				   menu += "3 - Hora de entrada" + '\n';
-				   menu += "4 - Hora de sa√≠da" + '\n';
+				   menu += "4 - Hora de saÌda" + '\n';
 				   menu += "0 - Sair";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
@@ -216,7 +216,7 @@ public abstract class GerenciarAcessos {
 				break;
 			}
 			case 2: {
-				String data = JOptionPane.showInputDialog("Informe a nova data de sa√≠da: [dd/mm/aaaa]");
+				String data = JOptionPane.showInputDialog("Informe a nova data de saÌda: [dd/mm/aaaa]");
 				a.setDataSaida(data);
 				break;
 			}
@@ -227,7 +227,7 @@ public abstract class GerenciarAcessos {
 				break;
 			}
 			case 4: {
-				String hora = JOptionPane.showInputDialog("Informe a nova hora de sa√≠da: [HH:mm]");
+				String hora = JOptionPane.showInputDialog("Informe a nova hora de saÌda: [HH:mm]");
 				a.setHoraSaida_str(hora);
 				a.setHoraSaida(converterHora(hora));
 				break;
@@ -241,7 +241,7 @@ public abstract class GerenciarAcessos {
 
 	public static void removerAcessos(Acessos a) throws DescricaoEmBrancoException, ObjetoNaoEncontradoException {
 		acs.remove(a);
-		JOptionPane.showMessageDialog(null, "Remo√ß√£o conclu√≠da!");
+		JOptionPane.showMessageDialog(null, "RemoÁ„o concluÌda!");
 	}
 
 	public static int converterHora(String hora) {
@@ -272,8 +272,8 @@ public abstract class GerenciarAcessos {
 				resposta += "Valor a pagar: R$" + a.calcularValor() + "\n";
 				resposta += "Valor do contratante: R$" + a.calcularContratante() + "\n";
 			}
-			resposta += "Data de entrada - sa√≠da: " + a.getDataEntrada() + " - " + a.getDataSaida() + "\n";
-			resposta += "Hora de entrada - sa√≠da: " + a.getHoraEntrada_str() + " - " + a.getHoraSaida_str() + "\n";
+			resposta += "Data de entrada - saÌda: " + a.getDataEntrada() + " - " + a.getDataSaida() + "\n";
+			resposta += "Hora de entrada - saÌda: " + a.getHoraEntrada_str() + " - " + a.getHoraSaida_str() + "\n";
 			JOptionPane.showMessageDialog(null, resposta);
 	}
 

@@ -1,7 +1,5 @@
 package estacionamento;
 
-//import javax.swing.JOptionPane;
-
 import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
@@ -16,13 +14,11 @@ public class Mensalista extends Acessos {
     }
 
     public float calcularContratante() {
-		//float contra = (es.getTaxaFixaMensal() * es.getContratante()) / 100;
-		//return contra;
+
 		return 0.00f;
 	}
 	
 	public float calcularValor() {
-		//return es.getTaxaFixaMensal();
 		return 0.00f;
 	}
 

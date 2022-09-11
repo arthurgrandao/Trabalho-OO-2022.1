@@ -1,7 +1,5 @@
 package estacionamento;
 
-//import javax.swing.JOptionPane;
-
 import exceptions.DescricaoEmBrancoException;
 import exceptions.ValorAcessoInvalidoException;
 
