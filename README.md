@@ -1,5 +1,5 @@
-# Diagramas-UML-OO
-Trabalho Prático - Entrega 1
+# Trabalho Prático OO
+
 
 <b> Membros: </b>
 <ul>
@@ -8,11 +8,3 @@ Trabalho Prático - Entrega 1
 <li> Gabriel Campello Marques - 211039439 </li>
 <li> Rafael Ferreira Leandro - 211041286 </li>
 </ul>
-
-<b> Diagrama De Classes: </b>
-
-<img src="diagrama.png">
-
-<b> Diagrama De Objetos: </b>
-
-<img src="diagrama1.png">
