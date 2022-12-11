@@ -6,8 +6,7 @@ import exceptions.ValorAcessoInvalidoException;
 
 import javax.swing.JOptionPane;
 
-import estacionamento.GerenciarAcessos;
-import estacionamento.GerenciarEstacionamento;
+import estacionamento.*;
 
 
 public class Main {
@@ -17,45 +16,50 @@ public class Main {
 		
 		int opcao = 0; 
 		do {
-			String menu = ""; 
-			menu += "Informe a opcao desejada: " + '\n'; 
-			menu += "1 - Cadastrar Estacioamento" + '\n';
-			menu += "2 - Pesquisar Estacionamento" + '\n';
-			menu += "3 - Cadastrar Acessos" + '\n';
-			menu += "4 - Remover Acessos" + '\n';
-			menu += "5 - Pesquisar Acessos";
+			String menu = "Informe a opcao desejada:\n" +
+						  "1 - Cadastrar Estacioamento\n" +
+						  "2 - Pesquisar Estacionamento\n" +
+						  "3 - Cadastrar Acessos\n" +
+						  "4 - Remover Acessos\n" +
+						  "5 - Atualizar Acessos\n" +
+						  "6 - Pesquisar Acessos\n" +
+						  "0 - Sair";
 
 			String strOpcao = JOptionPane.showInputDialog(menu);
 			opcao = Integer.parseInt(strOpcao);
 
 
-
-			
 			switch (opcao) {
 			case 1: {
 				GerenciarEstacionamento.cadrastrarEstacionamento();
 				break;
 			}
 			case 2: {
-				GerenciarEstacionamento.pesquisarEstacionamento();
+				GerenciarEstacionamento.relatorio(GerenciarEstacionamento.buscarEstacionamento());
 				break;
 			}
 			case 3: {
 				GerenciarAcessos.cadrastrarAcesso();
 				break;
 			}
-			case 4: {
-				GerenciarAcessos.removerAcessos();
+			case 4: {	
+				GerenciarAcessos.removerAcessos(GerenciarAcessos.escolherAcesso());
 				break;
 			}
 			
 			case 5: {
-				GerenciarAcessos.relatorio(GerenciarAcessos.pesquisarAcessos());
+				GerenciarAcessos.atualizarAcesso(GerenciarAcessos.escolherAcesso());
 				break;
 			}
+
+			case 6: {
+				GerenciarAcessos.relatorio(GerenciarAcessos.buscarAcessos());
+				break;
+			}
+
 			
 			default:
-				opcao = -1; 
+				opcao = 0; 
 			}
 
 		} while (opcao != 0);
