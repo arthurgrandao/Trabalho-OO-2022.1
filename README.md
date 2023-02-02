@@ -1,4 +1,10 @@
-# Grupo 09 - Orientação a Objetos - 2022.1 (UnB-FGA)
+# Grupo 09 - Trabalho OO 2022.1 (UnB-FGA)
+
+* Matéria: Orientação a Objetos.
+* Professor: André Luiz Peron Martins Lanna.
+* 3° semestre de Engenharia de Software.
+
+Criação de um software de gerenciamento de estacionamentos utilizando orientação a objetos.
 
 ## Membros:
 * Arthur Grandão de Mello - 211039250
